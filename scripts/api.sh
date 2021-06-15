@@ -7,8 +7,7 @@ API_PORT="6501"
 REQUIRED_TABLES="Users Comments Posts PostType"
 
 
-# this is supposed to detect if the correct collections are being served but it doesnt
-check() {
+docheck() {
 	curl -sX GET localhost:$API_PORT/db
 }
 
@@ -27,6 +26,12 @@ start() {
 
 false=0
 true=1
+
+if docheck; then
+	check=$true
+else
+	check=$false
+fi
 
 init=$false
 port=$false
@@ -50,7 +55,7 @@ done
 if (( port )); then
 	echo $API_PORT
 	exit 0
-elif check; then
+elif (( check )); then
 	if (( init )); then
 		initialize
 	else
