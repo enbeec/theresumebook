@@ -8,7 +8,7 @@ REQUIRED_TABLES="Users Comments Posts PostType"
 
 
 docheck() {
-	curl -sX GET localhost:$API_PORT/db
+	curl -sX GET localhost:$API_PORT/db > /dev/null
 }
 
 initialize() {
