@@ -39,16 +39,7 @@ confirm() {
 
 # this is supposed to detect if the correct collections are being served but it doesnt
 check() {
-	local response_tables="$(curl -sX GET localhost:$API_PORT/db | jq 'keys')"
-	for table in $REQUIRED_TABLES; do
-	# https://linuxize.com/post/how-to-check-if-string-contains-substring-in-bash/
-		if [[ "$table" == *"$response_tables"* ]]; then
-			:
-		else
-			return 0
-		fi
-	done
-	return 1
+	curl -sX GET localhost:$API_PORT/db
 }
 
 initialize() {
@@ -87,7 +78,6 @@ if check; then
 		initialize
 	else
 		echo API already running
-		confirm start "start your React App"
 		exit 1
 	fi
 else
