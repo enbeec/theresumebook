@@ -6,7 +6,7 @@ error_noapi() {
 }
 
 export PORT="6500"
-API_PORT="$(scripts/api.sh port)"
+API_PORT=$(scripts/api.sh port)
 
 # check that the API is running
 curl -XGET localhost:$API_PORT/db || error_noapi
