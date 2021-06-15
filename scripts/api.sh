@@ -1,41 +1,11 @@
 #!/usr/bin/env bash
 
-## NOT USING THIS :/
-
-## DEPENDENCIES
-# https://stackoverflow.com/questions/33297857/how-to-check-dependency-in-bash-script
-if command -v jq >/dev/null 2>&1 ; then
-	# jq found
-	:
-else
-	echo "please install jq"
-	exit 255
-fi
-
 ## VARIABLES
 INITFILE="api/example-db.json"
 DBFILE="api/db.json"
-# for react-scripts/start.js
-export PORT="6500"
 API_PORT="6501"
 REQUIRED_TABLES="Users Comments Posts PostType"
 
-## FUNCTIONS
-confirm() {
-	#$2 is an optional description
-	if [[ -n $2 ]]; then
-		echo "About to $2"
-	else
-		echo "About to do: $1"
-	fi
-
-	read -p "Are you sure? y or [n] => " -n 1 -r
-	echo
-	# REPLY is the default variable for read
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		eval "$1"
-	fi
-}
 
 # this is supposed to detect if the correct collections are being served but it doesnt
 check() {
@@ -59,11 +29,15 @@ false=0
 true=1
 
 init=$false
+port=$false
 
 while [[ "$#" -gt 0 ]]; do
 	case $1 in
 		init*)
 			init=$true
+			;;
+		port)
+			port=$true
 			;;
 		*) 
 			echo "Unknown argument: $1" 
@@ -73,7 +47,10 @@ while [[ "$#" -gt 0 ]]; do
 	shift
 done
 
-if check; then
+if (( port )); then
+	echo $API_PORT
+	exit 0
+elif check; then
 	if (( init )); then
 		initialize
 	else
