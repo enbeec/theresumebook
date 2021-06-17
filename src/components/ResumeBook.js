@@ -5,6 +5,7 @@ import { Register } from "./auth/Register";
 import { NavBar } from "./nav/NavBar";
 import { UserProvider } from "./users/UserProvider";
 import "./ResumeBook.css";
+import { ApplicationViews } from "./ApplicationViews";
 
 export const ResumeBook = () => (
   // FIXME its possible to overlay login/register on top of the main view
@@ -17,6 +18,7 @@ export const ResumeBook = () => (
               <h1>The ResumeBook</h1>
               <UserProvider>
                 <NavBar />
+                <ApplicationViews />
               </UserProvider>
             </>
           );

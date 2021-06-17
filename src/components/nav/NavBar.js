@@ -9,10 +9,11 @@ export const NavBar = (props) => {
 
   useEffect(() => {
     getCurrentUser();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const history = useHistory();
   const gotoHomepage = () => history.push("/");
+  const gotoCurrentUser = () => history.push(`/resume/${currentUser.id}`);
   const logout = () => {
     localStorage.removeItem("trb_user");
     history.push("/");
@@ -38,7 +39,7 @@ export const NavBar = (props) => {
 	  </div>
       <div
         className="navbar__item currentUser"
-        //   onClick={gotoCurrentUser}
+		onClick={gotoCurrentUser}
       >{currentUser.name}</div>
       <button className="navbar__item logoutButton" 
 	  	onClick={logout}

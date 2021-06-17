@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import "./Login.css";
 
 export const Login = (props) => {
@@ -28,42 +28,47 @@ export const Login = (props) => {
     });
   };
 
-  return (
-    <main className="container--login">
-      <dialog className="dialog dialog--auth" ref={existDialog}>
-        <div>User does not exist</div>
-        <button
-          className="button--close"
-          onClick={(e) => existDialog.current.close()}
-        >
-          Close
-        </button>
-      </dialog>
+  // QUESTION is there a better way to achieve this?
+  if (localStorage.getItem("trb_user")) {
+    return <Redirect to="/" />;
+  } else {
+    return (
+      <main className="container--login">
+        <dialog className="dialog dialog--auth" ref={existDialog}>
+          <div>User does not exist</div>
+          <button
+            className="button--close"
+            onClick={(e) => existDialog.current.close()}
+          >
+            Close
+          </button>
+        </dialog>
 
-      <section>
-        <form className="form--login" onSubmit={handleLogin}>
-          <h1>Welcome to The ResumeBook</h1>
-          <h2>Please sign in</h2>
-          <fieldset>
-            <label htmlFor="inputEmail"> Email address </label>
-            <input
-              ref={email}
-              type="email"
-              id="email"
-              className="form-control"
-              placeholder="Email address"
-              required
-              autoFocus
-            />
-          </fieldset>
-          <fieldset>
-            <button type="submit">Sign in</button>
-          </fieldset>
-        </form>
-      </section>
-      <section className="link--register">
-        <Link to="/register">Not a member yet?</Link>
-      </section>
-    </main>
-  );
+        <section>
+          <form className="form--login" onSubmit={handleLogin}>
+            <h1>Welcome to The ResumeBook</h1>
+            <h2>Please sign in</h2>
+            <fieldset>
+              <label htmlFor="inputEmail"> Email address </label>
+              <input
+                ref={email}
+                type="email"
+                id="email"
+                className="form-control"
+                placeholder="Email address"
+                required
+                autoFocus
+              />
+            </fieldset>
+            <fieldset>
+              <button type="submit">Sign in</button>
+            </fieldset>
+          </form>
+        </section>
+        <section className="link--register">
+          <Link to="/register">Not a member yet?</Link>
+        </section>
+      </main>
+    );
+  }
 };
