@@ -2,14 +2,21 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
+import { NavBar } from "./nav/NavBar";
 import "./ResumeBook.css";
 
 export const ResumeBook = () => (
+  // FIXME its possible to overlay login/register on top of the main view
   <>
     <Route
       render={() => {
         if (localStorage.getItem("trb_user")) {
-          return <>The ResumeBook</>;
+          return (
+            <>
+              <h1>The ResumeBook</h1>
+              <NavBar />
+            </>
+          );
         } else {
           return <Redirect to="/login" />;
         }
