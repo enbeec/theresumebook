@@ -15,7 +15,6 @@ export const ResumeBook = () => (
         if (localStorage.getItem("trb_user")) {
           return (
             <>
-              <h1>The ResumeBook</h1>
               <UserProvider>
                 <NavBar />
                 <ApplicationViews />
