@@ -8,7 +8,6 @@ import "./ResumeBook.css";
 import { ApplicationViews } from "./ApplicationViews";
 
 export const ResumeBook = () => (
-  // FIXME its possible to overlay login/register on top of the main view
   <>
     <Route
       path="/"
