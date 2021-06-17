@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { ReactComponent as Logo } from "../../man-holding-resume-1-cropped.svg";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../users/UserProvider";
 import "./NavBar.css";
 
 export const NavBar = (props) => {
+  const { currentUser, getCurrentUser } = useContext(UserContext);
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
   const history = useHistory();
   const gotoHomepage = () => history.push("/");
   const logout = () => {
@@ -13,7 +20,7 @@ export const NavBar = (props) => {
 
   // prettier-ignore
   return (
-    <ul class="navbar testBorder">
+    <ul className="navbar testBorder">
       <div className="navbar__item" 
 		onClick={gotoHomepage}
 	  ><Logo /></div>
@@ -22,7 +29,7 @@ export const NavBar = (props) => {
 			className="navbar__item filterSelect"
 			//	onClick={}
 		>
-		  <option selected>find more resumes...</option>
+		  <option>find more resumes...</option>
 		</select>
 		<button
 			className="navbar__item filterButton"
@@ -32,7 +39,7 @@ export const NavBar = (props) => {
       <div
         className="navbar__item currentUser"
         //   onClick={gotoCurrentUser}
-      >Current User</div>
+      >{currentUser.name}</div>
       <button className="navbar__item logoutButton" 
 	  	onClick={logout}
 	  >Logout</button>

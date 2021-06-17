@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import { NavBar } from "./nav/NavBar";
+import { UserProvider } from "./users/UserProvider";
 import "./ResumeBook.css";
 
 export const ResumeBook = () => (
@@ -14,7 +15,9 @@ export const ResumeBook = () => (
           return (
             <>
               <h1>The ResumeBook</h1>
-              <NavBar />
+              <UserProvider>
+                <NavBar />
+              </UserProvider>
             </>
           );
         } else {
