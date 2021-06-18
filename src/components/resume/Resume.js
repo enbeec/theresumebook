@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { theme } from "../../theme/trbTheme";
 import { Box, Flex } from "rebass";
-import { rosybrown } from "color-name";
 import "./Resume.css";
 
 const Container = (props) => (
@@ -21,11 +20,13 @@ const VerticalSplit = (props) => (
   <Flex
     {...props}
     theme={theme}
+    width="90%"
     sx={{
       flexGrow: "1",
       flexShrink: "1",
       flexBasis: "60%",
       flexDirection: "row",
+      justifyContent: "space-evenly",
     }}
   />
 );
@@ -34,6 +35,7 @@ const ProjectsContainer = (props) => (
   <Flex
     {...props}
     theme={theme}
+    width="90%"
     sx={{
       flexDirection: "row",
       flexWrap: "wrap",
@@ -45,15 +47,49 @@ const ProjectsContainer = (props) => (
   />
 );
 
+const ProjectBox = (props) => (
+  <Box
+    {...props}
+    theme={theme}
+    minHeight="10rem"
+    m="0.5rem"
+    textAlign="center"
+    bg="azure"
+    sx={{
+      flexBasis: "30%",
+      flexGrow: "1",
+      flexShrink: "1",
+    }}
+  />
+);
+
 const ExpsContainer = (props) => (
   <Flex
     {...props}
     theme={theme}
+    width="50%"
+    m="0%"
+    p="1rem"
     sx={{
       flexDirection: "column",
+      alignItems: "center",
       justifyContent: "space-around",
-      margin: "0%",
-      padding: "1rem",
+    }}
+  />
+);
+
+const ExpBox = (props) => (
+  <Box
+    {...props}
+    theme={theme}
+    m="0.5rem"
+    px="1rem"
+    textAlign="center"
+    minWidth="70%"
+    bg="azure"
+    sx={{
+      flexGrow: "1",
+      flexShrink: "1",
     }}
   />
 );
@@ -62,11 +98,29 @@ const SkillsContainer = (props) => (
   <Flex
     {...props}
     theme={theme}
+    width="50%"
+    m="0%"
+    p="1rem"
     sx={{
       flexDirection: "column",
+      alignItems: "center",
       justifyContent: "space-around",
-      margin: "0%",
-      padding: "1rem",
+    }}
+  />
+);
+
+const SkillBox = (props) => (
+  <Box
+    {...props}
+    theme={theme}
+    m="0.5rem"
+    px="1rem"
+    textAlign="center"
+    minWidth="70%"
+    bg="azure"
+    sx={{
+      flexGrow: "1",
+      flexShrink: "1",
     }}
   />
 );
@@ -74,20 +128,20 @@ const SkillsContainer = (props) => (
 export const Resume = () => (
   <Container>
     <ProjectsContainer>
-      <Box>project 1</Box>
-      <Box>project 2</Box>
-      <Box>project 3</Box>
+      <ProjectBox>project 1</ProjectBox>
+      <ProjectBox>project 2</ProjectBox>
+      <ProjectBox>project 3</ProjectBox>
     </ProjectsContainer>
     <VerticalSplit>
       <SkillsContainer>
-        <div className="skill centered">skill 1</div>
-        <div className="skill centered">skill 2</div>
-        <div className="skill centered">skill 3</div>
+        <SkillBox className="skill centered">skill 1</SkillBox>
+        <SkillBox className="skill centered">skill 2</SkillBox>
+        <SkillBox className="skill centered">skill 3</SkillBox>
       </SkillsContainer>
       <ExpsContainer>
-        <div className="exp centered">exp 1</div>
-        <div className="exp centered">exp 2</div>
-        <div className="exp centered">exp 3</div>
+        <ExpBox className="exp centered">exp 1</ExpBox>
+        <ExpBox className="exp centered">exp 2</ExpBox>
+        <ExpBox className="exp centered">exp 3</ExpBox>
       </ExpsContainer>
     </VerticalSplit>
   </Container>
