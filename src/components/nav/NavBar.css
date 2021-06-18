@@ -5,10 +5,18 @@
     align-items: flex-end;
 	padding: 2rem;
     padding-top: 0.1rem;
-    padding-bottom: 0%;
+    padding-bottom: 1%;
+    margin: 0;
+}
+
+.navbar__container {
+    flex-basis: 20%;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
 
 .navbar__item {
-    flex-basis: 20%;
-    list-style-type: none;
+    margin-top: 0.5rem;
 }

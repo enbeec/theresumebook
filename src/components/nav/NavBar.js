@@ -27,21 +27,21 @@ export const NavBar = (props) => {
 
   return (
     <div className="navbar ">
-      <Logo
-        width="20%"
-        viewBox="65 -30 500 400"
-        className="logo"
-        onClick={gotoHomepage}
-      />
-      <div className="navbar__item">
+      <Logo width="18%" className="logo" onClick={gotoHomepage} />
+      <div className="navbar__container">
         <UserSelect selectFunc={gotoSelectedUser} />
       </div>
-      <div className="navbar__item currentUser" onClick={gotoCurrentUser}>
-        {currentUser.name}
+      <div className="navbar__container">
+        <div
+          className="headerBody navbar__item currentUser"
+          onClick={gotoCurrentUser}
+        >
+          {currentUser.name}
+        </div>
+        <button className="navbar__item logoutButton" onClick={logout}>
+          Logout
+        </button>
       </div>
-      <button className="navbar__item logoutButton" onClick={logout}>
-        Logout
-      </button>
     </div>
   );
 };
