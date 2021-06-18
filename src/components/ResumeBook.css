@@ -6,9 +6,14 @@ h1, h2 {
 	border: 1px dotted crimson
 }
 
+.centered {
+	text-align: center;
+}
+
 .resumeContainer {
 	/* PARENT */
 	display: flex;
+	flex-direction: column;
 }
 
 .projectsContainer {
@@ -17,36 +22,55 @@ h1, h2 {
 	flex: 1 1 30%;
 	margin: 0%;
 	padding: 1rem;
+	justify-content: space-between;
 	/* PARENT */
 	display: flex;
 }
 
-/* .project {} */
+.project {
+	flex: 1 1 30%;
+	min-height: 10rem;
+	background-color: azure;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+} 
 
 .skillsAndExpsContainer {
 	/* CHILD */
-	flex-flow: row wrap;
 	flex: 1 1 30%;
-	margin: 0%;
-	padding: 1rem;
 	/* PARENT */
 	display: flex;
+	flex-flow: row;
 }
 
 .skillsContainer {
-	/* PARENT */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-/* .skill {} */
-
-.expsContainer {  
+	flex: 1 1 50%;
+	margin: 0%;
+	padding: 1rem;
 	/* PARENT */
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 }
 
-/* .exp {} */
+.skill {
+	text-align: center;
+	background-color: azure;
+	margin: 0.5rem 0.5rem 0 0;
+}
+
+.expsContainer {  
+	flex: 1 1 50%;
+	margin: 0%;
+	padding: 1rem;
+	/* PARENT */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.exp {
+	text-align: center;
+	background-color: azure;
+	margin: 0.5rem 0.5rem 0 0;
+}

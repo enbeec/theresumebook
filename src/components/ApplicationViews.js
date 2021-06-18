@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { Resume } from "./resume/Resume";
 
 export const ApplicationViews = () => {
   return (
@@ -8,10 +9,7 @@ export const ApplicationViews = () => {
         <h2>Homepage</h2>
       </Route>
       <Route exact path="/resume/:userId(\d+)">
-        <h2>
-          Resume for the user whose Id you see at the end of your URL right now
-          🙈
-        </h2>
+        <Resume />
       </Route>
     </>
   );
