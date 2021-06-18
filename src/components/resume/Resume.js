@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Flex } from "rebass";
-import "./Resume.css";
 
 export const Resume = () => (
   <>

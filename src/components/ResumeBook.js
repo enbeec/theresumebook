@@ -4,7 +4,6 @@ import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import { NavBar } from "./nav/NavBar";
 import { UserProvider } from "./users/UserProvider";
-import "./ResumeBook.css";
 import { ApplicationViews } from "./ApplicationViews";
 
 export const ResumeBook = () => (
