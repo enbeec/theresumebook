@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ReactComponent as Logo } from "../../man-holding-resume-1-cropped.svg";
+import { ReactComponent as Logo } from "../../trb-logo.svg";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../users/UserProvider";
 import "./NavBar.css";
@@ -26,10 +26,13 @@ export const NavBar = (props) => {
   };
 
   return (
-    <ul className="navbar testBorder">
-      <div className="navbar__item" onClick={gotoHomepage}>
-        <Logo />
-      </div>
+    <div className="navbar ">
+      <Logo
+        width="20%"
+        viewBox="65 -30 500 400"
+        className="logo"
+        onClick={gotoHomepage}
+      />
       <div className="navbar__item">
         <UserSelect selectFunc={gotoSelectedUser} />
       </div>
@@ -39,6 +42,6 @@ export const NavBar = (props) => {
       <button className="navbar__item logoutButton" onClick={logout}>
         Logout
       </button>
-    </ul>
+    </div>
   );
 };

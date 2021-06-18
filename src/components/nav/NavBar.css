@@ -2,7 +2,10 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-around;
-	padding: 2rem
+    align-items: flex-end;
+	padding: 2rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0%;
 }
 
 .navbar__item {
