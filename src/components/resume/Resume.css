@@ -1,19 +1,3 @@
-.resumeContainer {
-	/* PARENT */
-	display: flex;
-	flex-direction: column;
-}
-
-.projectsContainer {
-	/* CHILD */
-	flex-flow: row wrap;
-	flex: 1 1 30%;
-	margin: 0%;
-	padding: 1rem;
-	justify-content: space-between;
-	/* PARENT */
-	display: flex;
-}
 
 .project {
 	flex: 1 1 30%;
@@ -23,23 +7,7 @@
 	margin-right: 0.5rem;
 } 
 
-.skillsAndExpsContainer {
-	/* CHILD */
-	flex: 1 1 30%;
-	/* PARENT */
-	display: flex;
-	flex-flow: row;
-}
 
-.skillsContainer {
-	flex: 1 1 50%;
-	margin: 0%;
-	padding: 1rem;
-	/* PARENT */
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-}
 
 .skill {
 	text-align: center;

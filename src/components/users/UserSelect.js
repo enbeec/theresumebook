@@ -6,7 +6,7 @@ const UserOptions = ({ searchTerm }) => {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const userOption = (user) => (
     <option key={user.id} value={user.id}>

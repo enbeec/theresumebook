@@ -7,7 +7,7 @@ export const ApplicationViews = () => {
   return (
     <>
       <Route exact path="/">
-        <Heading>Homepage</Heading>
+        <Heading sx={{ textAlign: "center" }}>Homepage</Heading>
       </Route>
       <Route exact path="/resume/:userId(\d+)">
         <Resume />
