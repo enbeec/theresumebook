@@ -5,3 +5,48 @@ h1, h2 {
 .testBorder {
 	border: 1px dotted crimson
 }
+
+.resumeContainer {
+	/* PARENT */
+	display: flex;
+}
+
+.projectsContainer {
+	/* CHILD */
+	flex-flow: row wrap;
+	flex: 1 1 30%;
+	margin: 0%;
+	padding: 1rem;
+	/* PARENT */
+	display: flex;
+}
+
+/* .project {} */
+
+.skillsAndExpsContainer {
+	/* CHILD */
+	flex-flow: row wrap;
+	flex: 1 1 30%;
+	margin: 0%;
+	padding: 1rem;
+	/* PARENT */
+	display: flex;
+}
+
+.skillsContainer {
+	/* PARENT */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* .skill {} */
+
+.expsContainer {  
+	/* PARENT */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+/* .exp {} */

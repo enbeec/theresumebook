@@ -39,7 +39,7 @@
     }
   ],
   "Comments": [],
-  "PostType": [
+  "PostTypes": [
     {
       "id": 1,
       "type": "exp"
