@@ -7,7 +7,6 @@ export const SkillsList = ({ userId }) => {
   const { getUserSkills } = useContext(SkillContext);
   const [userSkills, setUserSkills] = useState([]);
   useEffect(() => {
-    debugger;
     getUserSkills(userId).then(setUserSkills);
   }, userId);
   const SkillBoxes = (props) => {
