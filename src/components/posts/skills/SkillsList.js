@@ -8,7 +8,6 @@ export const SkillsList = ({ userId }) => {
   const [userSkills, setUserSkills] = useState([]);
 
   useEffect(() => {
-    debugger;
     getUserSkills(userId).then(setUserSkills);
   }, userId);
 
