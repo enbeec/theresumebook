@@ -5,6 +5,9 @@ import { Register } from "./auth/Register";
 import { NavBar } from "./nav/NavBar";
 import { UserProvider } from "./users/UserProvider";
 import { ApplicationViews } from "./ApplicationViews";
+import { ExpProvider } from "./posts/ExpProvider";
+import { SkillProvider } from "./posts/SkillProvider";
+import { ProjectProvider } from "./posts/ProjectProvider";
 
 export const ResumeBook = () => (
   <>
@@ -15,8 +18,14 @@ export const ResumeBook = () => (
           return (
             <>
               <UserProvider>
-                <NavBar />
-                <ApplicationViews />
+                <ExpProvider>
+                  <SkillProvider>
+                    <ProjectProvider>
+                      <NavBar />
+                      <ApplicationViews />
+                    </ProjectProvider>
+                  </SkillProvider>
+                </ExpProvider>
               </UserProvider>
             </>
           );

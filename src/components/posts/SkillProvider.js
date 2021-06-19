@@ -1,8 +1,8 @@
 import React, { useState, createContext } from "react";
 
-export const PostContext = createContext();
+export const SkillContext = createContext();
 
-export const PostProvider = (props) => {
+export const SkillProvider = (props) => {
   const apiURL = "http://localhost:6501";
   const skillsURL = `${apiURL}/posts?postTypeId=2`;
   const [skills, setSkills] = useState([]);
@@ -15,8 +15,8 @@ export const PostProvider = (props) => {
   };
 
   return (
-    <PostContext.Provider value={{ skills, getUserSkills }}>
+    <SkillContext.Provider value={{ skills, getUserSkills }}>
       {props.children}
-    </PostContext.Provider>
+    </SkillContext.Provider>
   );
 };

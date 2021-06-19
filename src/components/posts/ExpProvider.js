@@ -1,8 +1,8 @@
 import React, { useState, createContext } from "react";
 
-export const PostContext = createContext();
+export const ExpContext = createContext();
 
-export const PostProvider = (props) => {
+export const ExpProvider = (props) => {
   const apiURL = "http://localhost:6501";
   const expsURL = `${apiURL}/posts?postTypeId=1`;
   const [exps, setExps] = useState([]);
@@ -15,8 +15,8 @@ export const PostProvider = (props) => {
   };
 
   return (
-    <PostContext.Provider value={{ exps, getUserExps }}>
+    <ExpContext.Provider value={{ exps, getUserExps }}>
       {props.children}
-    </PostContext.Provider>
+    </ExpContext.Provider>
   );
 };

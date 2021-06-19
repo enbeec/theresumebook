@@ -1,8 +1,8 @@
 import React, { useState, createContext } from "react";
 
-export const PostContext = createContext();
+export const ProjectContext = createContext();
 
-export const PostProvider = (props) => {
+export const ProjectProvider = (props) => {
   const apiURL = "http://localhost:6501";
   const projectsURL = `${apiURL}/posts?postTypeId=3`;
   const [projects, setProjects] = useState([]);
@@ -15,8 +15,8 @@ export const PostProvider = (props) => {
   };
 
   return (
-    <PostContext.Provider value={{ projects, getUserProjects }}>
+    <ProjectContext.Provider value={{ projects, getUserProjects }}>
       {props.children}
-    </PostContext.Provider>
+    </ProjectContext.Provider>
   );
 };
