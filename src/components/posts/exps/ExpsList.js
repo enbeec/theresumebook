@@ -9,7 +9,7 @@ export const ExpsList = ({ userId }) => {
 
   useEffect(() => {
     getUserExps(userId).then(setUserExps);
-  }, userId);
+  }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const ExpBoxes = (props) => (
     <>

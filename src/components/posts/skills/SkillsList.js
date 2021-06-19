@@ -9,7 +9,7 @@ export const SkillsList = ({ userId }) => {
 
   useEffect(() => {
     getUserSkills(userId).then(setUserSkills);
-  }, userId);
+  }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const SkillBoxes = (props) => {
     return (
