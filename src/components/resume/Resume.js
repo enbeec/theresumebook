@@ -4,23 +4,26 @@ import { theme } from "../../theme/trbTheme";
 import { Box, Flex } from "rebass";
 import { SkillsList } from "../posts/skills/SkillsList";
 
-export const Resume = () => (
-  <Container>
-    <ProjectsContainer>
-      <ProjectBox>project 1</ProjectBox>
-      <ProjectBox>project 2</ProjectBox>
-      <ProjectBox>project 3</ProjectBox>
-    </ProjectsContainer>
-    <VerticalSplit>
-      <SkillsList />
-      <ExpsContainer>
-        <ExpBox className="exp centered">exp 1</ExpBox>
-        <ExpBox className="exp centered">exp 2</ExpBox>
-        <ExpBox className="exp centered">exp 3</ExpBox>
-      </ExpsContainer>
-    </VerticalSplit>
-  </Container>
-);
+export const Resume = () => {
+  const { userId } = useParams();
+  return (
+    <Container>
+      <ProjectsContainer>
+        <ProjectBox>project 1</ProjectBox>
+        <ProjectBox>project 2</ProjectBox>
+        <ProjectBox>project 3</ProjectBox>
+      </ProjectsContainer>
+      <VerticalSplit>
+        <SkillsList userId={userId} />
+        <ExpsContainer>
+          <ExpBox className="exp centered">exp 1</ExpBox>
+          <ExpBox className="exp centered">exp 2</ExpBox>
+          <ExpBox className="exp centered">exp 3</ExpBox>
+        </ExpsContainer>
+      </VerticalSplit>
+    </Container>
+  );
+};
 
 const Container = (props) => (
   <Flex

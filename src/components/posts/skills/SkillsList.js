@@ -1,14 +1,34 @@
-import React, { useContext, useEffect } from "react";
-import { Flex, Box } from "rebass";
+import React, { useContext, useEffect, useState } from "react";
+import { Text, Heading, Flex, Box } from "rebass";
 import { theme } from "../../../theme/trbTheme";
 import { SkillContext } from "./SkillProvider";
 
-export const SkillsList = (props) => {
+export const SkillsList = ({ userId }) => {
+  const { getUserSkills } = useContext(SkillContext);
+  const [userSkills, setUserSkills] = useState([]);
+  useEffect(() => {
+    debugger;
+    getUserSkills(userId).then(setUserSkills);
+  }, userId);
+  const SkillBoxes = (props) => {
+    return (
+      <>
+        {userSkills.map((skillObj) => {
+          return (
+            <SkillBox {...props} key={skillObj.id}>
+              <Heading fontSize={2}>{skillObj.title}</Heading>
+              <Text>{skillObj.desc}</Text>
+            </SkillBox>
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <SkillsContainer>
-      <SkillBox>skill 1</SkillBox>
-      <SkillBox>skill 2</SkillBox>
-      <SkillBox>skill 3</SkillBox>
+      <Heading>Skills</Heading>
+      <SkillBoxes />
     </SkillsContainer>
   );
 };

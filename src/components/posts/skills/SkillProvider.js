@@ -8,7 +8,6 @@ export const SkillProvider = (props) => {
   const skillsTypeId = 2;
   const skillsURL = `${apiURL}/posts?postTypeId=${skillsTypeId}`;
   const [skills, setSkills] = useState([]);
-  const [userSkills, setUserSkills] = useState([]);
 
   const getSkills = () => {
     return fetch(skillsURL)
@@ -17,16 +16,12 @@ export const SkillProvider = (props) => {
   };
 
   const getUserSkills = (userId) => {
-    const userIdParam = `?userId=${userId}`;
-    return fetch(skillsURL + userIdParam)
-      .then((res) => res.json())
-      .then(setUserSkills);
+    const userIdParam = `&userId=${userId}`;
+    return fetch(skillsURL + userIdParam).then((res) => res.json());
   };
 
   return (
-    <SkillContext.Provider
-      value={{ skills, getSkills, userSkills, getUserSkills }}
-    >
+    <SkillContext.Provider value={{ skills, getSkills, getUserSkills }}>
       {props.children}
     </SkillContext.Provider>
   );
