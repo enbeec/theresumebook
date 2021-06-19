@@ -6,21 +6,21 @@ import { SkillContext } from "./SkillProvider";
 export const SkillsList = ({ userId }) => {
   const { getUserSkills } = useContext(SkillContext);
   const [userSkills, setUserSkills] = useState([]);
+
   useEffect(() => {
     debugger;
     getUserSkills(userId).then(setUserSkills);
   }, userId);
+
   const SkillBoxes = (props) => {
     return (
       <>
-        {userSkills.map((skillObj) => {
-          return (
-            <SkillBox {...props} key={skillObj.id}>
-              <Heading fontSize={2}>{skillObj.title}</Heading>
-              <Text>{skillObj.desc}</Text>
-            </SkillBox>
-          );
-        })}
+        {userSkills.map((skillObj) => (
+          <SkillBox {...props} key={skillObj.id}>
+            <Heading fontSize={2}>{skillObj.title}</Heading>
+            <Text>{skillObj.desc}</Text>
+          </SkillBox>
+        ))}
       </>
     );
   };

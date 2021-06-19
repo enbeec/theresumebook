@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { theme } from "../../theme/trbTheme";
 import { Box, Flex } from "rebass";
 import { SkillsList } from "../posts/skills/SkillsList";
+import { ExpsList } from "../posts/exps/ExpsList";
 
 export const Resume = () => {
   const { userId } = useParams();
@@ -15,11 +16,7 @@ export const Resume = () => {
       </ProjectsContainer>
       <VerticalSplit>
         <SkillsList userId={userId} />
-        <ExpsContainer>
-          <ExpBox className="exp centered">exp 1</ExpBox>
-          <ExpBox className="exp centered">exp 2</ExpBox>
-          <ExpBox className="exp centered">exp 3</ExpBox>
-        </ExpsContainer>
+        <ExpsList userId={userId} />
       </VerticalSplit>
     </Container>
   );
@@ -47,7 +44,7 @@ const VerticalSplit = (props) => (
       flexShrink: "1",
       flexBasis: "60%",
       flexDirection: "row",
-      justifyContent: "space-evenly",
+      justifyContent: "space-between",
     }}
   />
 );
@@ -78,37 +75,6 @@ const ProjectBox = (props) => (
     bg="azure"
     sx={{
       flexBasis: "30%",
-      flexGrow: "1",
-      flexShrink: "1",
-    }}
-  />
-);
-
-const ExpsContainer = (props) => (
-  <Flex
-    {...props}
-    theme={theme}
-    width="50%"
-    m="0%"
-    p="1rem"
-    sx={{
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "space-around",
-    }}
-  />
-);
-
-const ExpBox = (props) => (
-  <Box
-    {...props}
-    theme={theme}
-    m="0.5rem"
-    px="1rem"
-    textAlign="center"
-    minWidth="70%"
-    bg="azure"
-    sx={{
       flexGrow: "1",
       flexShrink: "1",
     }}
