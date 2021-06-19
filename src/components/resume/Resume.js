@@ -2,28 +2,28 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { theme } from "../../theme/trbTheme";
 import { Box, Flex } from "rebass";
+import { SkillsList } from "../posts/skills/SkillsList";
 
-export const Resume = () => (
-  <Container>
-    <ProjectsContainer>
-      <ProjectBox>project 1</ProjectBox>
-      <ProjectBox>project 2</ProjectBox>
-      <ProjectBox>project 3</ProjectBox>
-    </ProjectsContainer>
-    <VerticalSplit>
-      <SkillsContainer>
-        <SkillBox className="skill centered">skill 1</SkillBox>
-        <SkillBox className="skill centered">skill 2</SkillBox>
-        <SkillBox className="skill centered">skill 3</SkillBox>
-      </SkillsContainer>
-      <ExpsContainer>
-        <ExpBox className="exp centered">exp 1</ExpBox>
-        <ExpBox className="exp centered">exp 2</ExpBox>
-        <ExpBox className="exp centered">exp 3</ExpBox>
-      </ExpsContainer>
-    </VerticalSplit>
-  </Container>
-);
+export const Resume = () => {
+  const { userId } = useParams();
+  return (
+    <Container>
+      <ProjectsContainer>
+        <ProjectBox>project 1</ProjectBox>
+        <ProjectBox>project 2</ProjectBox>
+        <ProjectBox>project 3</ProjectBox>
+      </ProjectsContainer>
+      <VerticalSplit>
+        <SkillsList userId={userId} />
+        <ExpsContainer>
+          <ExpBox className="exp centered">exp 1</ExpBox>
+          <ExpBox className="exp centered">exp 2</ExpBox>
+          <ExpBox className="exp centered">exp 3</ExpBox>
+        </ExpsContainer>
+      </VerticalSplit>
+    </Container>
+  );
+};
 
 const Container = (props) => (
   <Flex
@@ -100,37 +100,6 @@ const ExpsContainer = (props) => (
 );
 
 const ExpBox = (props) => (
-  <Box
-    {...props}
-    theme={theme}
-    m="0.5rem"
-    px="1rem"
-    textAlign="center"
-    minWidth="70%"
-    bg="azure"
-    sx={{
-      flexGrow: "1",
-      flexShrink: "1",
-    }}
-  />
-);
-
-const SkillsContainer = (props) => (
-  <Flex
-    {...props}
-    theme={theme}
-    width="50%"
-    m="0%"
-    p="1rem"
-    sx={{
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "space-around",
-    }}
-  />
-);
-
-const SkillBox = (props) => (
   <Box
     {...props}
     theme={theme}

@@ -6,7 +6,7 @@ import { NavBar } from "./nav/NavBar";
 import { UserProvider } from "./users/UserProvider";
 import { ApplicationViews } from "./ApplicationViews";
 import { ExpProvider } from "./posts/ExpProvider";
-import { SkillProvider } from "./posts/SkillProvider";
+import { SkillProvider } from "./posts/skills/SkillProvider";
 import { ProjectProvider } from "./posts/ProjectProvider";
 
 export const ResumeBook = () => (
