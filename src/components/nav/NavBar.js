@@ -1,10 +1,43 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { ReactComponent as Logo } from "../../trb-logo.svg";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../users/UserProvider";
 import { UserSelect } from "../users/UserSelect";
 import { Text, Button, Flex } from "rebass";
 import { theme } from "../../theme/trbTheme";
+
+export const NavBar = () => {
+  const { currentUser, getCurrentUser } = useContext(UserContext);
+  useEffect(() => {
+    getCurrentUser();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const history = useHistory();
+  const gotoHomepage = () => history.push("/");
+  const gotoCurrentUser = () => history.push(`/resume/${currentUser.id}`);
+  const gotoSelectedUser = (event) => {
+    if (event.target.value) {
+      history.push(`/resume/${event.target.value}`);
+    }
+  };
+  const logout = () => {
+    localStorage.removeItem("trb_user");
+    history.push("/");
+  };
+
+  return (
+    <FlexBar>
+      <Logo width="18%" onClick={gotoHomepage} />
+      <BarSection>
+        <UserSelect selectFunc={gotoSelectedUser} />
+      </BarSection>
+      <BarSection>
+        <Text onClick={gotoCurrentUser}>{currentUser.name}</Text>
+        <LogoutButton onClick={logout}>Logout</LogoutButton>
+      </BarSection>
+    </FlexBar>
+  );
+};
 
 const FlexBar = (props) => (
   <Flex
@@ -59,36 +92,3 @@ const LogoutButton = (props) => (
     }}
   />
 );
-
-export const NavBar = () => {
-  const { currentUser, getCurrentUser } = useContext(UserContext);
-  useEffect(() => {
-    getCurrentUser();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const history = useHistory();
-  const gotoHomepage = () => history.push("/");
-  const gotoCurrentUser = () => history.push(`/resume/${currentUser.id}`);
-  const gotoSelectedUser = (event) => {
-    if (event.target.value) {
-      history.push(`/resume/${event.target.value}`);
-    }
-  };
-  const logout = () => {
-    localStorage.removeItem("trb_user");
-    history.push("/");
-  };
-
-  return (
-    <FlexBar>
-      <Logo width="18%" onClick={gotoHomepage} />
-      <BarSection>
-        <UserSelect selectFunc={gotoSelectedUser} />
-      </BarSection>
-      <BarSection>
-        <Text onClick={gotoCurrentUser}>{currentUser.name}</Text>
-        <LogoutButton onClick={logout}>Logout</LogoutButton>
-      </BarSection>
-    </FlexBar>
-  );
-};

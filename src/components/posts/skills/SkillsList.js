@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Flex, Box } from "rebass";
 import { theme } from "../../../theme/trbTheme";
+import { SkillContext } from "./SkillProvider";
 
 export const SkillsList = (props) => {
   return (
     <SkillsContainer>
-      <SkillBox className="skill centered">skill 1</SkillBox>
-      <SkillBox className="skill centered">skill 2</SkillBox>
-      <SkillBox className="skill centered">skill 3</SkillBox>
+      <SkillBox>skill 1</SkillBox>
+      <SkillBox>skill 2</SkillBox>
+      <SkillBox>skill 3</SkillBox>
     </SkillsContainer>
   );
 };
