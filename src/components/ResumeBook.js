@@ -7,7 +7,7 @@ import { UserProvider } from "./users/UserProvider";
 import { ApplicationViews } from "./ApplicationViews";
 import { ExpProvider } from "./posts/exps/ExpProvider";
 import { SkillProvider } from "./posts/skills/SkillProvider";
-import { ProjectProvider } from "./posts/ProjectProvider";
+import { ProjectProvider } from "./posts/projects/ProjectProvider";
 
 export const ResumeBook = () => (
   <>

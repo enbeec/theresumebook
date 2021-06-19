@@ -7,15 +7,20 @@ export const ProjectProvider = (props) => {
   const projectsURL = `${apiURL}/posts?postTypeId=3`;
   const [projects, setProjects] = useState([]);
 
-  const getUserProjects = (userId) => {
-    const userIdParam = `?userId=${userId}`;
-    return fetch(projectsURL + userIdParam)
+  const getProjects = () =>
+    fetch(projectsURL)
       .then((res) => res.json())
       .then(setProjects);
+
+  const getUserProjects = (userId) => {
+    const userIdParam = `&userId=${userId}`;
+    return fetch(projectsURL + userIdParam).then((res) => res.json());
   };
 
   return (
-    <ProjectContext.Provider value={{ projects, getUserProjects }}>
+    <ProjectContext.Provider
+      value={{ projects, setProjects, getProjects, getUserProjects }}
+    >
       {props.children}
     </ProjectContext.Provider>
   );
