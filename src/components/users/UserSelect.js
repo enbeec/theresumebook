@@ -14,13 +14,14 @@ const UserOptions = ({ searchTerm }) => {
     </option>
   );
 
-  // if there is a search term, filter using startsWith
+  // filter func that returns everything if there is no searchTerm
   const userSearch = (user) =>
-    searchTerm ? user.name.toLowerCase().startsWith(searchTerm) : true;
+    searchTerm ? user.name.toLowerCase().includes(searchTerm) : true;
 
   return <>{users.filter(userSearch).map(userOption)}</>;
 };
 
+// TODO try refactoring as "filteredState"
 export const UserSelect = ({ selectFunc }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const changeSearchTerm = (event) => setSearchTerm(event.target.value);

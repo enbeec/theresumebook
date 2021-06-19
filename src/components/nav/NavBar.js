@@ -40,23 +40,25 @@ const BarSection = (props) => (
 );
 
 const LogoutButton = (props) => (
-  <Button sx={hoverStyles} {...props} theme={theme} />
+  <Button
+    {...props}
+    theme={theme}
+    sx={{
+      backgroundColor: "lightgrey",
+      color: "black",
+      outline: "coral solid 1px",
+      ":hover": {
+        color: "coral",
+        outline: "black solid 0px",
+        boxShadow: "-2px 4px darkgrey",
+      },
+      ":active": {
+        bg: "coral",
+        color: "white",
+      },
+    }}
+  />
 );
-
-const hoverStyles = {
-  backgroundColor: "lightgrey",
-  color: "black",
-  outline: "coral solid 1px",
-  ":hover": {
-    color: "coral",
-    outline: "black solid 0px",
-    boxShadow: "-2px 4px darkgrey",
-  },
-  ":active": {
-    bg: "coral",
-    color: "white",
-  },
-};
 
 export const NavBar = () => {
   const { currentUser, getCurrentUser } = useContext(UserContext);
@@ -79,9 +81,9 @@ export const NavBar = () => {
 
   return (
     <FlexBar>
-      <Logo width="18%" className="logo" onClick={gotoHomepage} />
+      <Logo width="18%" onClick={gotoHomepage} />
       <BarSection>
-        <UserSelect selectStyles={hoverStyles} selectFunc={gotoSelectedUser} />
+        <UserSelect selectFunc={gotoSelectedUser} />
       </BarSection>
       <BarSection>
         <Text onClick={gotoCurrentUser}>{currentUser.name}</Text>

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { theme } from "../../theme/trbTheme";
 import { Box, Flex } from "rebass";
-import "./Resume.css";
 
 const Container = (props) => (
   <Flex
