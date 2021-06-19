@@ -7,15 +7,18 @@ export const ExpProvider = (props) => {
   const expsURL = `${apiURL}/posts?postTypeId=1`;
   const [exps, setExps] = useState([]);
 
-  const getUserExps = (userId) => {
-    const userIdParam = `?userId=${userId}`;
-    return fetch(expsURL + userIdParam)
+  const getExps = () =>
+    fetch(expsURL)
       .then((res) => res.json())
       .then(setExps);
+
+  const getUserExps = (userId) => {
+    const userIdParam = `&userId=${userId}`;
+    return fetch(expsURL + userIdParam).then((res) => res.json());
   };
 
   return (
-    <ExpContext.Provider value={{ exps, getUserExps }}>
+    <ExpContext.Provider value={{ exps, getExps, getUserExps }}>
       {props.children}
     </ExpContext.Provider>
   );

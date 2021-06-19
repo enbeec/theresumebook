@@ -55,8 +55,6 @@ const FlexBar = (props) => (
   />
 );
 
-const BarText = (props) => <Text {...props} theme={theme} />;
-
 const BarSection = (props) => (
   <Flex
     sx={{

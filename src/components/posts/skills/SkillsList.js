@@ -6,20 +6,20 @@ import { SkillContext } from "./SkillProvider";
 export const SkillsList = ({ userId }) => {
   const { getUserSkills } = useContext(SkillContext);
   const [userSkills, setUserSkills] = useState([]);
+
   useEffect(() => {
     getUserSkills(userId).then(setUserSkills);
-  }, userId);
+  }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const SkillBoxes = (props) => {
     return (
       <>
-        {userSkills.map((skillObj) => {
-          return (
-            <SkillBox {...props} key={skillObj.id}>
-              <Heading fontSize={2}>{skillObj.title}</Heading>
-              <Text>{skillObj.desc}</Text>
-            </SkillBox>
-          );
-        })}
+        {userSkills.map((skillObj) => (
+          <SkillBox {...props} key={skillObj.id}>
+            <Heading fontSize={2}>{skillObj.title}</Heading>
+            <Text>{skillObj.desc}</Text>
+          </SkillBox>
+        ))}
       </>
     );
   };
