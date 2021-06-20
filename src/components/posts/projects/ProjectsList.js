@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, Heading, Flex, Box } from "rebass";
+import { Image, Text, Heading, Flex, Box } from "rebass";
 import { theme } from "../../../theme/trbTheme";
 import { ProjectContext } from "./ProjectProvider";
 
@@ -9,13 +9,24 @@ export const ProjectsList = ({ userId }) => {
 
   useEffect(() => {
     getUserProjects(userId).then(setUserProjects);
-  }, [userId]);
+  }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const ProjectBoxes = (props) => (
+    <>
+      {userProjects.map((projectObj) => (
+        <ProjectBox>
+          <Heading fontSize={2}>{projectObj.title}</Heading>
+          <br />
+          <Image theme={theme} maxHeight="70%" src={projectObj.thumbnail} />
+          <Text>{projectObj.desc}</Text>
+        </ProjectBox>
+      ))}
+    </>
+  );
 
   return (
     <ProjectsContainer>
-      <ProjectBox>project 1</ProjectBox>
-      <ProjectBox>project 2</ProjectBox>
-      <ProjectBox>project 3</ProjectBox>
+      <ProjectBoxes />
     </ProjectsContainer>
   );
 };
@@ -31,7 +42,7 @@ const ProjectsContainer = (props) => (
       flexGrow: "1",
       flexShrink: "1",
       flexBasis: "30%",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
     }}
   />
 );
@@ -46,7 +57,7 @@ const ProjectBox = (props) => (
     bg="azure"
     sx={{
       flexBasis: "30%",
-      flexGrow: "1",
+      flexGrow: "0.15",
       flexShrink: "1",
     }}
   />

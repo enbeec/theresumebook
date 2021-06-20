@@ -10,7 +10,7 @@ export const Resume = () => {
   const { userId } = useParams();
   return (
     <Container>
-      <ProjectsList />
+      <ProjectsList userId={userId} />
       <VerticalSplit>
         <SkillsList userId={userId} />
         <ExpsList userId={userId} />
