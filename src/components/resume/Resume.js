@@ -9,17 +9,17 @@ import { ExpsList } from "../posts/exps/ExpsList";
 export const Resume = () => {
   const { userId } = useParams();
   return (
-    <Container>
+    <ResumeContainer>
       <ProjectsList userId={userId} />
       <VerticalSplit>
         <SkillsList userId={userId} />
         <ExpsList userId={userId} />
       </VerticalSplit>
-    </Container>
+    </ResumeContainer>
   );
 };
 
-const Container = (props) => (
+const ResumeContainer = (props) => (
   <Flex
     {...props}
     theme={theme}

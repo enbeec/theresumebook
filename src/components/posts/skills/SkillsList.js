@@ -50,6 +50,7 @@ const SkillBox = (props) => (
     {...props}
     theme={theme}
     m="0.5rem"
+    pt="1rem"
     px="1rem"
     textAlign="center"
     minWidth="70%"

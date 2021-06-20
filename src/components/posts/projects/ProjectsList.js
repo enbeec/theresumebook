@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Image, Text, Heading, Flex, Box } from "rebass";
+import { Link, Image, Text, Heading, Flex, Box } from "rebass";
 import { theme } from "../../../theme/trbTheme";
 import { ProjectContext } from "./ProjectProvider";
 
@@ -15,10 +15,15 @@ export const ProjectsList = ({ userId }) => {
     <>
       {userProjects.map((projectObj) => (
         <ProjectBox>
-          <Heading fontSize={2}>{projectObj.title}</Heading>
-          <br />
-          <Image theme={theme} maxHeight="70%" src={projectObj.thumbnail} />
-          <Text>{projectObj.desc}</Text>
+          <Flex p="1rem" flexDirection="column">
+            <Heading fontSize={2}>{projectObj.title}</Heading>
+            <br />
+            <Image theme={theme} src={projectObj.thumbnail} />
+            <Flex p="1rem" flexDirection="column">
+              <Text>{projectObj.desc}</Text>
+              <Link href={projectObj.link}>{projectObj.link}</Link>
+            </Flex>
+          </Flex>
         </ProjectBox>
       ))}
     </>
@@ -53,6 +58,7 @@ const ProjectBox = (props) => (
     theme={theme}
     minHeight="10rem"
     m="0.5rem"
+    pt="1rem"
     textAlign="center"
     bg="azure"
     sx={{
