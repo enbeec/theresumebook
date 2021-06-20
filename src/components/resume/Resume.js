@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { theme } from "../../theme/trbTheme";
-import { Box, Flex } from "rebass";
+import { Flex } from "rebass";
 import { ProjectsList } from "../posts/projects/ProjectsList";
 import { SkillsList } from "../posts/skills/SkillsList";
 import { ExpsList } from "../posts/exps/ExpsList";
