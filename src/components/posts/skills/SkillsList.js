@@ -11,18 +11,16 @@ export const SkillsList = ({ userId }) => {
     getUserSkills(userId).then(setUserSkills);
   }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const SkillBoxes = (props) => {
-    return (
-      <>
-        {userSkills.map((skillObj) => (
-          <SkillBox {...props} key={skillObj.id}>
-            <Heading fontSize={2}>{skillObj.title}</Heading>
-            <Text>{skillObj.desc}</Text>
-          </SkillBox>
-        ))}
-      </>
-    );
-  };
+  const SkillBoxes = (props) => (
+    <>
+      {userSkills.map((skillObj) => (
+        <SkillBox {...props} key={skillObj.id}>
+          <Heading fontSize={2}>{skillObj.title}</Heading>
+          <Text>{skillObj.desc}</Text>
+        </SkillBox>
+      ))}
+    </>
+  );
 
   return (
     <SkillsContainer>
