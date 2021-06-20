@@ -51,6 +51,7 @@ const ExpBox = (props) => (
     theme={theme}
     m="0.5rem"
     px="1rem"
+    pt="1rem"
     textAlign="center"
     minWidth="70%"
     bg="azure"
