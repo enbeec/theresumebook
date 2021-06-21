@@ -12,69 +12,73 @@ export const NavBar = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const history = useHistory();
-  const gotoHomepage = () => history.push("/");
-  const gotoCurrentUser = () => history.push(`/resume/${currentUser.id}`);
-  const gotoSelectedUser = (event) => {
-    if (event.target.value) {
-      history.push(`/resume/${event.target.value}`);
-    }
-  };
-  const logout = () => {
-    localStorage.removeItem("trb_user");
-    history.push("/");
-  };
-
-  const FlexBar = styled.div`
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: flex-end;
-    padding: 2rem;
-    padding-top: 0.1rem;
-    padding-bottom: 0.5rem;
-    margin: 0;
-  `;
-
-  const BarSection = styled.div`
-    /* PARENT */
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    /* CHILD */
-    flex-basis: 20%;
-    padding-bottom: 1rem;
-  `;
-
-  const LogoutButton = styled.button`
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-radius: 0.5rem;
-    border-width: 0.2rem;
-    border-style: inset;
-    background-color: lightgrey;
-    color: black;
-    /* outline: coral solid 1px; */
-    :hover {
-      color: coral;
-      outline: black solid 0px;
-      box-shadow: -1px 2px darkgrey;
-    }
-    :active {
-      background: coral;
-      color: white;
-    }
-  `;
 
   return (
     <FlexBar>
-      <Logo width="18%" onClick={gotoHomepage} />
+      <Logo width="18%" onClick={() => history.push("/")} />
       <BarSection>
-        <UserSelect selectFunc={gotoSelectedUser} />
+        <UserSelect
+          selectFunc={(event) => {
+            if (event.target.value) {
+              history.push(`/resume/${event.target.value}`);
+            }
+          }}
+        />
       </BarSection>
       <BarSection>
-        <div onClick={gotoCurrentUser}>{currentUser.name}</div>
-        <LogoutButton onClick={logout}>Logout</LogoutButton>
+        <div onClick={() => history.push(`/resume/${currentUser.id}`)}>
+          {currentUser.name}
+        </div>
+        <LogoutButton
+          onClick={() => {
+            localStorage.removeItem("trb_user");
+            history.push("/");
+          }}
+        >
+          Logout
+        </LogoutButton>
       </BarSection>
     </FlexBar>
   );
 };
+
+const FlexBar = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 2rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.5rem;
+  margin: 0;
+`;
+
+const BarSection = styled.div`
+  /* PARENT */
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  /* CHILD */
+  flex-basis: 20%;
+  padding-bottom: 1rem;
+`;
+
+const LogoutButton = styled.button`
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.5rem;
+  border-width: 0.2rem;
+  border-style: inset;
+  background-color: lightgrey;
+  color: black;
+  /* outline: coral solid 1px; */
+  :hover {
+    color: coral;
+    outline: black solid 0px;
+    box-shadow: -1px 2px darkgrey;
+  }
+  :active {
+    background: coral;
+    color: white;
+  }
+`;

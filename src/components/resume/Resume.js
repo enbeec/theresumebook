@@ -8,22 +8,6 @@ import styled from "styled-components";
 export const Resume = () => {
   const { userId } = useParams();
 
-  const ResumeContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  `;
-
-  const VerticalSplit = styled.div`
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 60%;
-    /* parent */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  `;
-
   return (
     <ResumeContainer>
       <ProjectsList userId={userId} />
@@ -34,3 +18,19 @@ export const Resume = () => {
     </ResumeContainer>
   );
 };
+
+const ResumeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const VerticalSplit = styled.div`
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 60%;
+  /* parent */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
