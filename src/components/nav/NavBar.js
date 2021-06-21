@@ -3,7 +3,6 @@ import { ReactComponent as Logo } from "../../trb-logo.svg";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../users/UserProvider";
 import { UserSelect } from "../users/UserSelect";
-import { Text, Button, Flex } from "rebass";
 import styled from "styled-components";
 
 export const NavBar = () => {
@@ -73,7 +72,7 @@ export const NavBar = () => {
         <UserSelect selectFunc={gotoSelectedUser} />
       </BarSection>
       <BarSection>
-        <Text onClick={gotoCurrentUser}>{currentUser.name}</Text>
+        <div onClick={gotoCurrentUser}>{currentUser.name}</div>
         <LogoutButton onClick={logout}>Logout</LogoutButton>
       </BarSection>
     </FlexBar>

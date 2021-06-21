@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, Heading, Flex, Box } from "rebass";
-import { theme } from "../../../theme/trbTheme";
 import { ExpContext } from "./ExpProvider";
+import styled from "styled-components";
 
 export const ExpsList = ({ userId }) => {
   const { getUserExps } = useContext(ExpContext);
@@ -15,12 +14,46 @@ export const ExpsList = ({ userId }) => {
     <>
       {userExps.map((expObj) => (
         <ExpBox {...props} key={expObj.id}>
-          <Heading fontSize={2}>{expObj.title}</Heading>
+          <SubHeading fontSize={2}>{expObj.title}</SubHeading>
           <Text>{expObj.desc}</Text>
         </ExpBox>
       ))}
     </>
   );
+
+  const ExpsContainer = styled.div`
+    width: 50%;
+    margin: 0%;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  `;
+
+  const ExpBox = styled.div`
+    margin: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    text-align: center;
+    min-width: 70%;
+    background: azure;
+    flex-grow: 1;
+    flex-shrink: 1;
+  `;
+
+  // TODO import theming
+  const SubHeading = styled.h4`
+    text-align: center;
+    margin: 0;
+  `;
+  const Heading = styled.h2`
+    text-align: center;
+  `;
+
+  const Text = styled.span`
+    text-align: center;
+  `;
 
   return (
     <ExpsContainer>
@@ -29,35 +62,3 @@ export const ExpsList = ({ userId }) => {
     </ExpsContainer>
   );
 };
-
-const ExpsContainer = (props) => (
-  <Flex
-    {...props}
-    theme={theme}
-    width="50%"
-    m="0%"
-    p="1rem"
-    sx={{
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "space-around",
-    }}
-  />
-);
-
-const ExpBox = (props) => (
-  <Box
-    {...props}
-    theme={theme}
-    m="0.5rem"
-    px="1rem"
-    pt="1rem"
-    textAlign="center"
-    minWidth="70%"
-    bg="azure"
-    sx={{
-      flexGrow: "1",
-      flexShrink: "1",
-    }}
-  />
-);
