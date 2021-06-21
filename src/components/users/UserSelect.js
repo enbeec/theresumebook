@@ -3,8 +3,13 @@ import styled from "styled-components";
 import { UserContext } from "./UserProvider";
 
 export const UserSelect = ({ selectFunc }) => {
+  const { users, getUsers } = useContext(UserContext);
   const [searchTerm, setSearchTerm] = useState("");
-  const changeSearchTerm = (event) => setSearchTerm(event.target.value);
+
+  useEffect(() => {
+    // FIXME this is looping ad infinitum
+    getUsers();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -12,34 +17,22 @@ export const UserSelect = ({ selectFunc }) => {
         type="text"
         placeholder="Filter by name..."
         value={searchTerm}
-        onChange={changeSearchTerm}
+        onChange={(event) => setSearchTerm(event.target.value)}
       />
       <FilteredSelect onClick={selectFunc}>
         <option value="">View another resume...</option>
-        <UserOptions searchTerm={searchTerm} />
+        {users
+          .filter((user) =>
+            searchTerm ? user.name.toLowerCase().includes(searchTerm) : true
+          )
+          .map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
       </FilteredSelect>
     </>
   );
-};
-
-const UserOptions = ({ searchTerm }) => {
-  const { users, getUsers } = useContext(UserContext);
-
-  useEffect(() => {
-    getUsers();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const userOption = (user) => (
-    <option key={user.id} value={user.id}>
-      {user.name}
-    </option>
-  );
-
-  // filter func that returns everything if there is no searchTerm
-  const userSearch = (user) =>
-    searchTerm ? user.name.toLowerCase().includes(searchTerm) : true;
-
-  return <>{users.filter(userSearch).map(userOption)}</>;
 };
 
 const SelectFilter = styled.input`

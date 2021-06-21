@@ -6,7 +6,7 @@ export const Register = (props) => {
   const firstName = useRef();
   const lastName = useRef();
   const email = useRef();
-  const verifyPassword = useRef();
+  // const verifyPassword = useRef();
   const conflictDialog = useRef();
   const history = useHistory();
 

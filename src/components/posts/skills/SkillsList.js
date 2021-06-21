@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
 import { PostsList } from "../PostsList";
 import { SkillContext } from "./SkillProvider";
 
