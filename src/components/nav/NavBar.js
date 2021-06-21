@@ -65,6 +65,8 @@ const LogoutButton = styled.button`
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 0.5rem;
+  border-width: 0.2rem;
+  border-style: inset;
   background-color: lightgrey;
   color: black;
   /* outline: coral solid 1px; */
