@@ -4,8 +4,19 @@ export const ExpContext = createContext();
 
 export const ExpProvider = (props) => {
   const apiURL = "http://localhost:6501";
-  const expsURL = `${apiURL}/posts?postTypeId=1`;
+  const expTypeId = 1;
+  const expsURL = `${apiURL}/posts?postTypeId=${expTypeId}`;
   const [exps, setExps] = useState([]);
+
+  const addExp = (expObj) => {
+    return fetch(expsURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(expObj),
+    }).then(getExps);
+  };
 
   const getExps = () =>
     fetch(expsURL)
@@ -18,7 +29,7 @@ export const ExpProvider = (props) => {
   };
 
   return (
-    <ExpContext.Provider value={{ exps, getExps, getUserExps }}>
+    <ExpContext.Provider value={{ addExp, exps, getExps, getUserExps }}>
       {props.children}
     </ExpContext.Provider>
   );

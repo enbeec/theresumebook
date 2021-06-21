@@ -3,8 +3,7 @@ import { ReactComponent as Logo } from "../../trb-logo.svg";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../users/UserProvider";
 import { UserSelect } from "../users/UserSelect";
-import { Text, Button, Flex } from "rebass";
-import { theme } from "../../theme/trbTheme";
+import styled from "styled-components";
 
 export const NavBar = () => {
   const { currentUser, getCurrentUser } = useContext(UserContext);
@@ -25,6 +24,47 @@ export const NavBar = () => {
     history.push("/");
   };
 
+  const FlexBar = styled.div`
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 2rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.5rem;
+    margin: 0;
+  `;
+
+  const BarSection = styled.div`
+    /* PARENT */
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    /* CHILD */
+    flex-basis: 20%;
+    padding-bottom: 1rem;
+  `;
+
+  const LogoutButton = styled.button`
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.5rem;
+    border-width: 0.2rem;
+    border-style: inset;
+    background-color: lightgrey;
+    color: black;
+    /* outline: coral solid 1px; */
+    :hover {
+      color: coral;
+      outline: black solid 0px;
+      box-shadow: -1px 2px darkgrey;
+    }
+    :active {
+      background: coral;
+      color: white;
+    }
+  `;
+
   return (
     <FlexBar>
       <Logo width="18%" onClick={gotoHomepage} />
@@ -32,61 +72,9 @@ export const NavBar = () => {
         <UserSelect selectFunc={gotoSelectedUser} />
       </BarSection>
       <BarSection>
-        <Text onClick={gotoCurrentUser}>{currentUser.name}</Text>
+        <div onClick={gotoCurrentUser}>{currentUser.name}</div>
         <LogoutButton onClick={logout}>Logout</LogoutButton>
       </BarSection>
     </FlexBar>
   );
 };
-
-const FlexBar = (props) => (
-  <Flex
-    sx={{
-      flexWrap: "nowrap",
-      justifyContent: "space-around",
-      alignItems: "flex-end",
-      padding: "2rem",
-      paddingTop: "0.1rem",
-      paddingBottom: "0.5rem",
-      margin: 0,
-    }}
-    {...props}
-    theme={theme}
-  />
-);
-
-const BarSection = (props) => (
-  <Flex
-    sx={{
-      // PARENT
-      flexFlow: "column",
-      alignItems: "center",
-      // CHILD
-      flexBasis: "20%",
-      paddingBottom: "1rem",
-    }}
-    {...props}
-    theme={theme}
-  />
-);
-
-const LogoutButton = (props) => (
-  <Button
-    {...props}
-    theme={theme}
-    sx={{
-      backgroundColor: "lightgrey",
-      color: "black",
-      outline: "coral solid 1px",
-      ":hover": {
-        color: "coral",
-        outline: "black solid 0px",
-        boxShadow: "-2px 4px darkgrey",
-      },
-      ":active": {
-        bg: "coral",
-        color: "white",
-      },
-    }}
-  />
-);

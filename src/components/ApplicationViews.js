@@ -1,14 +1,15 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { Resume } from "./resume/Resume";
-import { Heading } from "rebass";
 
 export const ApplicationViews = () => {
   return (
     <>
+      {/* HOMEPAGE */}
       <Route exact path="/">
-        <Heading sx={{ textAlign: "center" }}>Homepage</Heading>
+        <h2>Homepage</h2>
       </Route>
+      {/* VIEW RESUME */}
       <Route exact path="/resume/:userId(\d+)">
         <Resume />
       </Route>
