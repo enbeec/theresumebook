@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const PostsList = ({
   headerText,
@@ -27,7 +27,7 @@ export const PostsList = ({
         </Box>
       ))}
       {displayForm && (
-        <Box>
+        <Box isForm>
           {/* TODO style this */}
           {/* TODO add a submit button*/}
           <form>
@@ -88,6 +88,20 @@ const Text = styled.span`
   text-align: center;
 `;
 
+export const formStyle = (props) =>
+  props.isForm
+    ? css`
+        background: lavender;
+        opacity: 70%;
+        justify-content: center;
+        :hover {
+          opacity: 100%;
+        }
+      `
+    : css`
+        background: azure;
+      `;
+
 const defaultBox = styled.div`
   margin: 0.5rem;
   padding-top: 1rem;
@@ -95,9 +109,10 @@ const defaultBox = styled.div`
   padding-left: 1rem;
   text-align: center;
   min-width: 70%;
-  background: azure;
   flex-grow: 1;
   flex-shrink: 1;
+
+  ${formStyle}
 `;
 
 const defaultContainer = styled.div`
