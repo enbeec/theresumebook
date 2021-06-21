@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { PostsList } from "../PostsList";
 import { ExpContext } from "./ExpProvider";
 
-export const ExpsList = ({ userId }) => {
+export const ExpsList = ({ userId, ...props }) => {
   const { getUserExps } = useContext(ExpContext);
   const [userExps, setUserExps] = useState([]);
 
@@ -10,5 +10,5 @@ export const ExpsList = ({ userId }) => {
     getUserExps(userId).then(setUserExps);
   }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <PostsList headerText="Experience" posts={userExps} />;
+  return <PostsList headerText="Experience" posts={userExps} {...props} />;
 };

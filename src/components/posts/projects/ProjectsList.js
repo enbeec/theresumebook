@@ -3,10 +3,9 @@ import { ProjectContext } from "./ProjectProvider";
 import styled from "styled-components";
 import { PostsList } from "../PostsList";
 
-export const ProjectsList = (props) => {
+export const ProjectsList = ({ userId, ...props }) => {
   const { getUserProjects } = useContext(ProjectContext);
   const [userProjects, setUserProjects] = useState([]);
-  const userId = props.userId;
 
   useEffect(() => {
     getUserProjects(userId).then(setUserProjects);
@@ -14,10 +13,12 @@ export const ProjectsList = (props) => {
 
   return (
     <PostsList
+      postType={"project"}
       posts={userProjects}
       postsContainer={projectsContainer}
       postBox={ProjectBox}
       thumbnail
+      {...props}
     />
   );
 };
@@ -32,7 +33,7 @@ const projectsContainer = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 30%;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 
 const ProjectBox = styled.div`
