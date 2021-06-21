@@ -11,19 +11,23 @@ export const UserSelect = ({ selectFunc }) => {
     getUsers();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const filterChange = (event) => setSearchTerm(event.target.value);
+
   return (
     <>
       <SelectFilter
         type="text"
         placeholder="Filter by name..."
         value={searchTerm}
-        onChange={(event) => setSearchTerm(event.target.value)}
+        onChange={filterChange}
       />
       <FilteredSelect onChange={selectFunc}>
         <option value="">View another resume...</option>
         {users
           .filter((user) =>
-            searchTerm ? user.name.toLowerCase().includes(searchTerm) : true
+            searchTerm
+              ? user.name.toLowerCase().includes(searchTerm.toLowerCase())
+              : true
           )
           .map((user) => (
             <option key={user.id} value={user.id}>

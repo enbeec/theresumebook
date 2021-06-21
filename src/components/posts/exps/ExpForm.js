@@ -2,7 +2,7 @@ import React, { useContext, UseEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ExpContext } from "./ExpProvider";
 
-export const ExpForm = () => {
+export const ExpForm = (props) => {
   const { addExp } = useContext(ExpContext);
   const userId = parseInt(localStorage.getItem("trb_user"));
   const [exp, setExp] = useState({
