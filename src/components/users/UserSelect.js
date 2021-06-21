@@ -19,7 +19,7 @@ export const UserSelect = ({ selectFunc }) => {
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
       />
-      <FilteredSelect onClick={selectFunc}>
+      <FilteredSelect onChange={selectFunc}>
         <option value="">View another resume...</option>
         {users
           .filter((user) =>
