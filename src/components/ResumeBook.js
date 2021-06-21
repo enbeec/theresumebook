@@ -1,4 +1,6 @@
 import React from "react";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./theme/theme";
 import { Route, Redirect } from "react-router-dom";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
@@ -16,7 +18,7 @@ export const ResumeBook = () => (
       render={() => {
         if (localStorage.getItem("trb_user")) {
           return (
-            <>
+            <ThemeProvider theme={theme}>
               <UserProvider>
                 <ExpProvider>
                   <SkillProvider>
@@ -27,7 +29,7 @@ export const ResumeBook = () => (
                   </SkillProvider>
                 </ExpProvider>
               </UserProvider>
-            </>
+            </ThemeProvider>
           );
         } else {
           return <Redirect to="/login" />;

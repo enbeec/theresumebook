@@ -3,9 +3,10 @@ import { Link, Image, Text, Heading, Flex, Box } from "rebass";
 import { theme } from "../../../theme/trbTheme";
 import { ProjectContext } from "./ProjectProvider";
 
-export const ProjectsList = ({ userId }) => {
+export const ProjectsList = (props) => {
   const { getUserProjects } = useContext(ProjectContext);
   const [userProjects, setUserProjects] = useState([]);
+  const userId = props.userId;
 
   useEffect(() => {
     getUserProjects(userId).then(setUserProjects);
