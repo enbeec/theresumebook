@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { PostForm } from "./PostForm";
 
 export const PostsList = ({
@@ -9,27 +9,37 @@ export const PostsList = ({
   postBox,
   postsContainer,
   thumbnail,
-  displayForm,
+  isCurrentUser,
   ...props
 }) => {
   const Box = postBox ? postBox : defaultBox;
   const Container = postsContainer ? postsContainer : defaultContainer;
+  const boxedPost = (p) => (
+    <Box key={p.id}>
+      <SubHeading> {p.title}</SubHeading>
+      {thumbnail && (
+        <a href={p.link} target="_blank" rel="noreferrer">
+          <Image src={p.thumbnail} />
+        </a>
+      )}
+      <Text>{p.desc}</Text>
+    </Box>
+  );
+
+  const [displayForm, setDisplayForm] = useState(false);
+  const MiniMode = (props) => (
+    <Box>
+      <button onClick={() => setDisplayForm(true)}>Add a {postType}</button>
+    </Box>
+  );
+  const FormSwitcher = ({ diplayForm, ...props }) =>
+    displayForm ? <PostForm postType={postType} postBox={Box} /> : <MiniMode />;
 
   return (
     <Container>
       {headerText && <Heading> {headerText} </Heading>}
-      {posts.map((p) => (
-        <Box key={p.id}>
-          <SubHeading> {p.title}</SubHeading>
-          {thumbnail && (
-            <a href={p.link} target="_blank" rel="noreferrer">
-              <Image src={p.thumbnail} />
-            </a>
-          )}
-          <Text>{p.desc}</Text>
-        </Box>
-      ))}
-      {displayForm && <PostForm postType={postType} postBox={Box} {...props} />}
+      {posts.map(boxedPost)}
+      {isCurrentUser && <FormSwitcher />}
     </Container>
   );
 };

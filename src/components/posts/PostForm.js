@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 export const PostForm = ({ postBox, postType }) => {
+  // TODO do this a different way so I'm not dynamically calling styled
+  //    I'll probably need to just make the original style take props
   const Box = styled(postBox)`
     background: lavender;
     opacity: 40%;

@@ -3,10 +3,6 @@ import React, { useState, createContext } from "react";
 export const PostContext = createContext();
 
 export const PostProvider = (props) => {
-  const [allExps, setExps] = useState([]);
-  const [allSkills, setSkills] = useState([]);
-  const [allProjects, setProjects] = useState([]);
-
   // just thought it'd be cool to sketch out what it would be like to
   //	make this adapt to new post types using a function
   // here's a hardcoded example of what we'd build in updatePostTypeIds
@@ -28,24 +24,7 @@ export const PostProvider = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(postObj),
-    }).then(getPosts);
-
-  const getPosts = (postType) =>
-    fetch(url(postType))
-      .then((res) => res.json())
-      .then((thePosts) => {
-        switch (postType) {
-          case "exp" || "exps":
-            setExps(thePosts);
-            break;
-          case "skill" || "skills":
-            setSkills(thePosts);
-            break;
-          case "project" || "projects":
-            setProjects(thePosts);
-            break;
-        }
-      });
+    });
 
   const getUserPosts = (postType, userId) =>
     fetch(url(postType) + `&userId=${userId}`).then((res) => res.json());

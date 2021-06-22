@@ -36,8 +36,6 @@ const projectsContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-// TODO find a way to not have to do this to get the form styles working
-//  I know I need to do some composition but I just need it working first
 const ProjectBox = styled.div`
   min-height: 10rem;
   margin: 0.5rem;

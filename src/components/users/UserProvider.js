@@ -15,9 +15,8 @@ export const UserProvider = (props) => {
   };
 
   const getCurrentUser = () => {
-    return fetch(`${usersURL}?id=${localStorage.getItem("trb_user")}`)
+    return fetch(`${usersURL}/${localStorage.getItem("trb_user")}`)
       .then((res) => res.json())
-      .then((array) => array[0])
       .then(setCurrentUser);
   };
 

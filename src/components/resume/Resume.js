@@ -8,14 +8,14 @@ import styled from "styled-components";
 export const Resume = () => {
   const { userId } = useParams();
   const currentUserId = localStorage.getItem("trb_user");
-  const displayForm = currentUserId === userId;
+  const isCurrentUser = currentUserId === userId;
 
   return (
     <ResumeContainer>
-      <ProjectsList userId={userId} displayForm={displayForm} />
+      <ProjectsList userId={userId} isCurrentUser={isCurrentUser} />
       <VerticalSplit>
-        <SkillsList userId={userId} displayForm={displayForm} />
-        <ExpsList userId={userId} displayForm={displayForm} />
+        <SkillsList userId={userId} isCurrentUser={isCurrentUser} />
+        <ExpsList userId={userId} isCurrentUser={isCurrentUser} />
       </VerticalSplit>
     </ResumeContainer>
   );
