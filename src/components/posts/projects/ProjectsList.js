@@ -50,6 +50,4 @@ const ProjectBox = styled.div`
   flex-basis: 30%;
   flex-grow: 0.15;
   flex-shrink: 1;
-
-  ${formStyle}
 `;

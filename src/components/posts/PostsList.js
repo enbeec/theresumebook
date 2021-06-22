@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { PostForm } from "./PostForm";
 
 export const PostsList = ({
   headerText,
@@ -9,6 +10,7 @@ export const PostsList = ({
   postsContainer,
   thumbnail,
   displayForm,
+  ...props
 }) => {
   const Box = postBox ? postBox : defaultBox;
   const Container = postsContainer ? postsContainer : defaultContainer;
@@ -26,45 +28,7 @@ export const PostsList = ({
           <Text>{p.desc}</Text>
         </Box>
       ))}
-      {displayForm && (
-        <Box isForm>
-          {/* TODO style this */}
-          {/* TODO add a submit button*/}
-          <form>
-            <div>
-              <label>
-                Title:
-                <br />
-                <input type="text" name="title" />
-              </label>
-            </div>
-            <div>
-              <label>
-                Description:
-                <br />
-                <input type="text" name="desc" />
-              </label>
-            </div>
-            {postType === "project" && (
-              <>
-                <div>
-                  <label>
-                    Link:
-                    <br />
-                    <input type="text" name="thumbnail" />
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Thumbnail Link:
-                    <input type="text" name="thumbnail" />
-                  </label>
-                </div>
-              </>
-            )}
-          </form>
-        </Box>
-      )}
+      {displayForm && <PostForm postType={postType} postBox={Box} />}
     </Container>
   );
 };
@@ -88,20 +52,6 @@ const Text = styled.span`
   text-align: center;
 `;
 
-export const formStyle = (props) =>
-  props.isForm
-    ? css`
-        background: lavender;
-        opacity: 70%;
-        justify-content: center;
-        :hover {
-          opacity: 100%;
-        }
-      `
-    : css`
-        background: azure;
-      `;
-
 const defaultBox = styled.div`
   margin: 0.5rem;
   padding-top: 1rem;
@@ -111,15 +61,14 @@ const defaultBox = styled.div`
   min-width: 70%;
   flex-grow: 1;
   flex-shrink: 1;
-
-  ${formStyle}
 `;
 
 const defaultContainer = styled.div`
+  flex-direction: column;
   width: 50%;
   margin: 0%;
   padding: 1rem;
-  flex-direction: column;
   align-items: center;
+  background: azure;
   justify-content: space-around;
 `;
