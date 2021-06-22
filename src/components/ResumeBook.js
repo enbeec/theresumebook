@@ -7,9 +7,7 @@ import { Register } from "./auth/Register";
 import { NavBar } from "./nav/NavBar";
 import { UserProvider } from "./users/UserProvider";
 import { ApplicationViews } from "./ApplicationViews";
-import { ExpProvider } from "./posts/exps/ExpProvider";
-import { SkillProvider } from "./posts/skills/SkillProvider";
-import { ProjectProvider } from "./posts/projects/ProjectProvider";
+import { PostProvider } from "./posts/PostProvider";
 
 export const ResumeBook = () => (
   <>
@@ -20,14 +18,10 @@ export const ResumeBook = () => (
           return (
             <ThemeProvider theme={theme}>
               <UserProvider>
-                <ExpProvider>
-                  <SkillProvider>
-                    <ProjectProvider>
-                      <NavBar />
-                      <ApplicationViews />
-                    </ProjectProvider>
-                  </SkillProvider>
-                </ExpProvider>
+                <PostProvider>
+                  <NavBar />
+                  <ApplicationViews />
+                </PostProvider>
               </UserProvider>
             </ThemeProvider>
           );

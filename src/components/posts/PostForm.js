@@ -4,46 +4,36 @@ import styled from "styled-components";
 export const PostForm = ({ postBox, postType }) => {
   const Box = styled(postBox)`
     background: lavender;
-    opacity: 70%;
+    opacity: 40%;
     justify-content: center;
-    :hover {
+    :hover,
+    :focus-within {
       opacity: 100%;
     }
   `;
+
+  // prettier-ignore
   return (
     <Box isForm>
-      {/* TODO style this */}
-      {/* TODO add a submit button*/}
       <form>
-        <div>
-          <label>
-            Title:
-            <br />
+        <div><label> Title:
+			<br />
             <input type="text" name="title" />
-          </label>
-        </div>
-        <div>
-          <label>
-            Description:
+		</label></div>
+        <div><label> Description:
             <br />
             <input type="text" name="desc" />
-          </label>
-        </div>
+		</label></div>
         {postType === "project" && (
           <>
-            <div>
-              <label>
-                Link:
+            <div><label>Link:
                 <br />
                 <input type="text" name="thumbnail" />
-              </label>
-            </div>
-            <div>
-              <label>
+            </label></div>
+            <div><label>
                 Thumbnail Link:
-                <input type="text" name="thumbnail" />
-              </label>
-            </div>
+				<input type="text" name="thumbnail" />
+			</label></div>
           </>
         )}
       </form>

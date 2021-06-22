@@ -14,6 +14,7 @@ export const PostsList = ({
 }) => {
   const Box = postBox ? postBox : defaultBox;
   const Container = postsContainer ? postsContainer : defaultContainer;
+
   return (
     <Container>
       {headerText && <Heading> {headerText} </Heading>}
@@ -28,7 +29,7 @@ export const PostsList = ({
           <Text>{p.desc}</Text>
         </Box>
       ))}
-      {displayForm && <PostForm postType={postType} postBox={Box} />}
+      {displayForm && <PostForm postType={postType} postBox={Box} {...props} />}
     </Container>
   );
 };

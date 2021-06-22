@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PostsList } from "../PostsList";
-import { SkillContext } from "./SkillProvider";
+import { PostContext } from "../PostProvider";
 
 export const SkillsList = ({ userId, ...props }) => {
-  const { getUserSkills } = useContext(SkillContext);
+  const { getUserPosts } = useContext(PostContext);
   const [userSkills, setUserSkills] = useState([]);
 
   useEffect(() => {
-    getUserSkills(userId).then(setUserSkills);
+    getUserPosts("skill", userId).then(setUserSkills);
   }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <PostsList headerText="Skills" posts={userSkills} {...props} />;

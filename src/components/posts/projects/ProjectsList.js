@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ProjectContext } from "./ProjectProvider";
+import { PostContext } from "../PostProvider";
 import styled from "styled-components";
-import { PostsList, formStyle } from "../PostsList";
+import { PostsList } from "../PostsList";
 
 export const ProjectsList = ({ userId, ...props }) => {
-  const { getUserProjects } = useContext(ProjectContext);
+  const { getUserPosts } = useContext(PostContext);
   const [userProjects, setUserProjects] = useState([]);
 
   useEffect(() => {
-    getUserProjects(userId).then(setUserProjects);
+    getUserPosts("project", userId).then(setUserProjects);
   }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
