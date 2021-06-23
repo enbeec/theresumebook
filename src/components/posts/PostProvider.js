@@ -30,7 +30,7 @@ export const PostProvider = (props) => {
     fetch(url(postType) + `&userId=${userId}`).then((res) => res.json());
 
   return (
-    <PostContext.Provider value={{ addPost, getUserPosts }}>
+    <PostContext.Provider value={{ addPost, getUserPosts, postTypeIds }}>
       {props.children}
     </PostContext.Provider>
   );

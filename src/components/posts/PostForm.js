@@ -1,43 +1,89 @@
-import React, { useEffect } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { PostContext } from "./PostProvider";
 
-export const PostForm = ({ postBox, postType }) => {
-  // TODO do this a different way so I'm not dynamically calling styled
-  //    I'll probably need to just make the original style take props
-  const Box = styled(postBox)`
-    background: lavender;
-    opacity: 40%;
-    justify-content: center;
-    :hover,
-    :focus-within {
-      opacity: 100%;
-    }
-  `;
+export const PostForm = ({ Box, boxStyle, postType }) => {
+  const { addPost, postTypeIds } = useContext(PostContext);
+  const [displayForm, setDisplayForm] = useState(false);
 
-  // prettier-ignore
-  return (
-    <Box isForm>
+  const [post, setPost] = useState({
+    userId: localStorage.getItem("trb_user"),
+    postTypeId: postTypeIds[postType],
+    title: "",
+    desc: "",
+    thumbnail: "",
+    link: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addPost(postType, post).then(() => {
+      setDisplayForm(false);
+      // TODO figure out how to re-render the parent
+    });
+  };
+
+  const handleControlledChange = (e) => {
+    const newPostCopy = { ...post };
+    newPostCopy[e.target.id] = e.target.value;
+    setPost(newPostCopy);
+  };
+
+  const TextField = ({ fieldFor, fieldLabel, postType, controlledChange }) => (
+    <fieldset>
+      <label>
+        {fieldLabel}
+        <br />
+        <input
+          type="text"
+          id={fieldFor}
+          key={fieldFor + postType}
+          required
+          value={post[fieldFor]}
+          onChange={controlledChange}
+        />
+      </label>
+    </fieldset>
+  );
+
+  return !displayForm ? (
+    <Box isForm={true} boxStyle={boxStyle}>
+      <button onClick={() => setDisplayForm(true)}>Add a {postType}</button>
+    </Box>
+  ) : (
+    <Box isForm={true} boxStyle={boxStyle}>
       <form>
-        <div><label> Title:
-			<br />
-            <input type="text" name="title" />
-		</label></div>
-        <div><label> Description:
-            <br />
-            <input type="text" name="desc" />
-		</label></div>
+        {TextField({
+          fieldFor: "title",
+          fieldLabel: "Title:",
+          postType: postType,
+          controlledChange: handleControlledChange,
+        })}
+
+        {/* TODO change this to a regular JSX function call */}
+        <TextField
+          fieldFor={"desc"}
+          fieldLabel={"Description:"}
+          postType={postType}
+          controlledChange={handleControlledChange}
+        />
         {postType === "project" && (
           <>
-            <div><label>Link:
-                <br />
-                <input type="text" name="thumbnail" />
-            </label></div>
-            <div><label>
-                Thumbnail Link:
-				<input type="text" name="thumbnail" />
-			</label></div>
+            {/* TODO change this to a regular JSX function call */}
+            <TextField
+              fieldFor={"link"}
+              fieldLabel={"Link:"}
+              postType={postType}
+            />
+            {/* TODO change this to a regular JSX function call */}
+            <TextField
+              fieldFor={"thumbnail"}
+              fieldLabel={"Thumbnail Link:"}
+              postType={postType}
+            />
           </>
         )}
+        <button onClick={handleSubmit}>Submit</button>
       </form>
     </Box>
   );

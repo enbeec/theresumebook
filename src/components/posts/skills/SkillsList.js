@@ -8,7 +8,14 @@ export const SkillsList = ({ userId, ...props }) => {
 
   useEffect(() => {
     getUserPosts("skill", userId).then(setUserSkills);
-  }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <PostsList headerText="Skills" posts={userSkills} {...props} />;
+  return (
+    <PostsList
+      headerText="Skills"
+      posts={userSkills}
+      postType={"skill"}
+      {...props}
+    />
+  );
 };

@@ -1,21 +1,18 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { PostForm } from "./PostForm";
 
 export const PostsList = ({
   headerText,
   postType,
   posts,
-  postBox,
-  postsContainer,
+  boxStyle,
+  containerStyle,
   thumbnail,
-  isCurrentUser,
   ...props
 }) => {
-  const Box = postBox ? postBox : defaultBox;
-  const Container = postsContainer ? postsContainer : defaultContainer;
   const boxedPost = (p) => (
-    <Box key={p.id}>
+    <Box boxStyle={boxStyle} key={p.id}>
       <SubHeading> {p.title}</SubHeading>
       {thumbnail && (
         <a href={p.link} target="_blank" rel="noreferrer">
@@ -26,20 +23,11 @@ export const PostsList = ({
     </Box>
   );
 
-  const [displayForm, setDisplayForm] = useState(false);
-  const MiniMode = (props) => (
-    <Box>
-      <button onClick={() => setDisplayForm(true)}>Add a {postType}</button>
-    </Box>
-  );
-  const FormSwitcher = ({ diplayForm, ...props }) =>
-    displayForm ? <PostForm postType={postType} postBox={Box} /> : <MiniMode />;
-
   return (
-    <Container>
+    <Container containerStyle={containerStyle}>
       {headerText && <Heading> {headerText} </Heading>}
       {posts.map(boxedPost)}
-      {isCurrentUser && <FormSwitcher />}
+      <PostForm postType={postType} Box={Box} boxStyle={boxStyle} />
     </Container>
   );
 };
@@ -63,23 +51,45 @@ const Text = styled.span`
   text-align: center;
 `;
 
-const defaultBox = styled.div`
-  margin: 0.5rem;
-  padding-top: 1rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  text-align: center;
-  min-width: 70%;
-  flex-grow: 1;
-  flex-shrink: 1;
+const Container = styled.div`
+  ${(props) =>
+    props.containerStyle
+      ? props.containerStyle
+      : css`
+          flex-direction: column;
+          width: 50%;
+          margin: 0%;
+          padding: 1rem;
+          align-items: center;
+          background: azure;
+          justify-content: space-around;
+        `}
 `;
 
-const defaultContainer = styled.div`
-  flex-direction: column;
-  width: 50%;
-  margin: 0%;
-  padding: 1rem;
-  align-items: center;
-  background: azure;
-  justify-content: space-around;
+const Box = styled.div`
+  ${(props) =>
+    props.boxStyle
+      ? props.boxStyle
+      : css`
+          margin: 0.5rem;
+          padding-top: 1rem;
+          padding-right: 1rem;
+          padding-left: 1rem;
+          text-align: center;
+          min-width: 70%;
+          flex-grow: 1;
+          flex-shrink: 1;
+        `}
+
+  ${(props) =>
+    props.isForm &&
+    css`
+      background: lavender;
+      justify-content: center;
+      opacity: 40%;
+      :hover,
+      :focus-within {
+        opacity: 100%;
+      }
+    `}
 `;

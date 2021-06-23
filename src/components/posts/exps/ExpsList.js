@@ -10,5 +10,12 @@ export const ExpsList = ({ userId, ...props }) => {
     getUserPosts("exp", userId).then(setUserExps);
   }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <PostsList headerText="Experience" posts={userExps} {...props} />;
+  return (
+    <PostsList
+      headerText="Experience"
+      posts={userExps}
+      postType={"exp"}
+      {...props}
+    />
+  );
 };
