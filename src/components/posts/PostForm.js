@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { PostContext } from "./PostProvider";
 
-export const PostForm = ({ Box, boxStyle, postType }) => {
+export const PostForm = ({ Box, boxStyle, postType, updatedFunc }) => {
   const { addPost, postTypeIds } = useContext(PostContext);
   const [displayForm, setDisplayForm] = useState(false);
 
@@ -19,7 +19,8 @@ export const PostForm = ({ Box, boxStyle, postType }) => {
     e.preventDefault();
     addPost(postType, post).then(() => {
       setDisplayForm(false);
-      // TODO figure out how to re-render the parent
+      // TODO this is very unclear
+      updatedFunc(postType);
     });
   };
 
@@ -74,12 +75,14 @@ export const PostForm = ({ Box, boxStyle, postType }) => {
               fieldFor={"link"}
               fieldLabel={"Link:"}
               postType={postType}
+              controlledChange={handleControlledChange}
             />
             {/* TODO change this to a regular JSX function call */}
             <TextField
               fieldFor={"thumbnail"}
               fieldLabel={"Thumbnail Link:"}
               postType={postType}
+              controlledChange={handleControlledChange}
             />
           </>
         )}

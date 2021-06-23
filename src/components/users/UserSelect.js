@@ -7,7 +7,6 @@ export const UserSelect = ({ selectFunc }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // FIXME this is looping ad infinitum
     getUsers();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

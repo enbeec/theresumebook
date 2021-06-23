@@ -3,10 +3,7 @@ import { PostContext } from "../PostProvider";
 import styled, { css } from "styled-components";
 import { PostsList } from "../PostsList";
 
-export const ProjectsList = ({ userId, ...props }) => {
-  const { getUserPosts } = useContext(PostContext);
-  const [userProjects, setUserProjects] = useState([]);
-
+export const ProjectsList = ({ ...props }) => {
   // projects are a little more complicated than skills or exps
   //  so we need some custom styling for PostsList
   const projectsContainerStyle = css`
@@ -34,14 +31,9 @@ export const ProjectsList = ({ userId, ...props }) => {
     flex-shrink: 1;
   `;
 
-  useEffect(() => {
-    getUserPosts("project", userId).then(setUserProjects);
-  }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
     <PostsList
       postType={"project"}
-      posts={userProjects}
       boxStyle={projectBoxStyle}
       containerStyle={projectsContainerStyle}
       thumbnail

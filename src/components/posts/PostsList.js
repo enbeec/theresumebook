@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { PostForm } from "./PostForm";
+import useUserPosts from "../../hooks/useUserPosts";
 
 export const PostsList = ({
+  userId,
   headerText,
   postType,
-  posts,
   boxStyle,
   containerStyle,
   thumbnail,
-  ...props
 }) => {
+  const { postsOfType, updatedPosts } = useUserPosts(userId);
+  const posts = postsOfType(postType);
+  console.log(posts);
+
   const boxedPost = (p) => (
     <Box boxStyle={boxStyle} key={p.id}>
       <SubHeading> {p.title}</SubHeading>
@@ -27,7 +31,12 @@ export const PostsList = ({
     <Container containerStyle={containerStyle}>
       {headerText && <Heading> {headerText} </Heading>}
       {posts.map(boxedPost)}
-      <PostForm postType={postType} Box={Box} boxStyle={boxStyle} />
+      <PostForm
+        postType={postType}
+        Box={Box}
+        boxStyle={boxStyle}
+        updatedFunc={updatedPosts}
+      />
     </Container>
   );
 };
