@@ -12,35 +12,33 @@ export const NavBar = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const history = useHistory();
+  const gotoHomepage = () => history.push("/");
+  const gotoCurrentUser = () => history.push(`/resume/${currentUser.id}`);
+  const gotoSelectedUserResume = (event) => {
+    if (event.target.value) {
+      history.push(`/resume/${event.target.value}`);
+    }
+  };
+  const logout = () => {
+    localStorage.removeItem("trb_user");
+    history.push("/");
+  };
 
   return (
     <FlexBar>
-      <Logo width="18%" onClick={() => history.push("/")} />
+      <Logo width="18%" onClick={gotoHomepage} />
       <BarSection>
-        <UserSelect
-          selectFunc={(event) => {
-            if (event.target.value) {
-              history.push(`/resume/${event.target.value}`);
-            }
-          }}
-        />
+        <UserSelect selectFunc={gotoSelectedUserResume} />
       </BarSection>
       <BarSection>
-        <div onClick={() => history.push(`/resume/${currentUser.id}`)}>
-          {currentUser.name}
-        </div>
-        <LogoutButton
-          onClick={() => {
-            localStorage.removeItem("trb_user");
-            history.push("/");
-          }}
-        >
-          Logout
-        </LogoutButton>
+        <Text onClick={gotoCurrentUser}>{currentUser.name}</Text>
+        <LogoutButton onClick={logout}>Logout</LogoutButton>
       </BarSection>
     </FlexBar>
   );
 };
+
+const Text = styled.span``;
 
 const FlexBar = styled.div`
   display: flex;

@@ -7,13 +7,15 @@ import styled from "styled-components";
 
 export const Resume = () => {
   const { userId } = useParams();
+  const currentUserId = localStorage.getItem("trb_user");
+  const isCurrentUser = currentUserId === userId;
 
   return (
     <ResumeContainer>
-      <ProjectsList userId={userId} />
+      <ProjectsList userId={userId} isCurrentUser={isCurrentUser} />
       <VerticalSplit>
-        <SkillsList userId={userId} />
-        <ExpsList userId={userId} />
+        <SkillsList userId={userId} isCurrentUser={isCurrentUser} />
+        <ExpsList userId={userId} isCurrentUser={isCurrentUser} />
       </VerticalSplit>
     </ResumeContainer>
   );

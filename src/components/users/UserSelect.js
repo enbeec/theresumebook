@@ -7,9 +7,10 @@ export const UserSelect = ({ selectFunc }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // FIXME this is looping ad infinitum
     getUsers();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const filterChange = (event) => setSearchTerm(event.target.value);
 
   return (
     <>
@@ -17,13 +18,15 @@ export const UserSelect = ({ selectFunc }) => {
         type="text"
         placeholder="Filter by name..."
         value={searchTerm}
-        onChange={(event) => setSearchTerm(event.target.value)}
+        onChange={filterChange}
       />
-      <FilteredSelect onClick={selectFunc}>
+      <FilteredSelect onChange={selectFunc}>
         <option value="">View another resume...</option>
         {users
           .filter((user) =>
-            searchTerm ? user.name.toLowerCase().includes(searchTerm) : true
+            searchTerm
+              ? user.name.toLowerCase().includes(searchTerm.toLowerCase())
+              : true
           )
           .map((user) => (
             <option key={user.id} value={user.id}>

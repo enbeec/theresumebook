@@ -1,50 +1,42 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ProjectContext } from "./ProjectProvider";
-import styled from "styled-components";
+import React from "react";
+import { css } from "styled-components";
 import { PostsList } from "../PostsList";
 
-export const ProjectsList = (props) => {
-  const { getUserProjects } = useContext(ProjectContext);
-  const [userProjects, setUserProjects] = useState([]);
-  const userId = props.userId;
+export const ProjectsList = ({ ...props }) => {
+  // projects are a little more complicated than skills or exps
+  //  so we need some custom styling for PostsList
+  const projectsContainerStyle = css`
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 30%;
+    justify-content: space-evenly;
+  `;
 
-  useEffect(() => {
-    getUserProjects(userId).then(setUserProjects);
-  }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
+  const projectBoxStyle = css`
+    min-height: 10rem;
+    margin: 0.5rem;
+    padding-top: 1rem;
+    text-align: center;
+    background: azure;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 30%;
+    flex-grow: 0.15;
+    flex-shrink: 1;
+  `;
 
   return (
     <PostsList
-      posts={userProjects}
-      postsContainer={projectsContainer}
-      postBox={ProjectBox}
+      postType={"project"}
+      boxStyle={projectBoxStyle}
+      containerStyle={projectsContainerStyle}
       thumbnail
+      {...props}
     />
   );
 };
-
-// projects are a little more complicated than skills or exps
-//  so we need some custom divs for PostsList
-const projectsContainer = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 30%;
-  justify-content: space-around;
-`;
-
-const ProjectBox = styled.div`
-  min-height: 10rem;
-  margin: 0.5rem;
-  padding-top: 1rem;
-  text-align: center;
-  background: azure;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-basis: 30%;
-  flex-grow: 0.15;
-  flex-shrink: 1;
-`;
