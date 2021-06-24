@@ -8,6 +8,7 @@ function useUserPosts(userId) {
   });
 
   const postsURL = "http://localhost:6501/posts";
+  // TODO rename this function
   const url = (postType) =>
     `${postsURL}?postTypeId=${postTypeIds[postType]}&userId=${userId}`;
 
@@ -34,7 +35,13 @@ function useUserPosts(userId) {
     });
   }
 
-  return { getPostsByType, addPost, postTypeIds };
+  function deletePost(postId) {
+    return fetch(`${postsURL}/${postId}`, {
+      method: "DELETE",
+    });
+  }
+
+  return { getPostsByType, addPost, deletePost, postTypeIds };
 }
 
 export default useUserPosts;
