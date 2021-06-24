@@ -107,21 +107,23 @@ const Text = styled.span`
 `;
 
 const Container = styled.div`
+  border-radius: 20px;
   ${(props) =>
     props.containerStyle
       ? props.containerStyle
       : css`
           flex-direction: column;
           width: 50%;
-          margin: 0%;
+          margin: 0.2rem;
           padding: 1rem;
           align-items: center;
           background: azure;
           justify-content: space-around;
-        `}
+        `};
 `;
 
 const Box = styled.div`
+  border-radius: 10px;
   ${(props) =>
     props.boxStyle
       ? props.boxStyle
