@@ -11,7 +11,9 @@ export const PostsList = ({
   containerStyle,
   thumbnail,
 }) => {
-  const { getPostsByType, addPost, postTypeIds } = useUserPosts(userId);
+  const { getPostsByType, addPost, deletePost, postTypeIds } =
+    useUserPosts(userId);
+
   // we can update this random value (which gets placed in the useEffect dep array)
   //  to trigger a re-render by passing `rerender` to a child
   const [random, setRandom] = useState(0);
@@ -33,6 +35,8 @@ export const PostsList = ({
         </a>
       )}
       <Text>{p.desc}</Text>
+      <br />
+      <button onClick={() => deletePost(p.id).then(rerender)}>Delete</button>
     </Box>
   );
 
