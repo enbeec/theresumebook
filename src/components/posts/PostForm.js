@@ -4,27 +4,50 @@ export const PostForm = ({
   Box,
   boxStyle,
   postType,
-  triggerRender,
-  // TODO /FIXME PASSING THESE TWO DOWN VIA PROPS IS UGLY
+  renderCallback,
   addPostFunc,
   postTypeIds,
+  postObj,
+  putPostFunc,
 }) => {
   const [displayForm, setDisplayForm] = useState(false);
-  const [post, setPost] = useState({
-    userId: localStorage.getItem("trb_user"),
-    postTypeId: postTypeIds[postType],
-    title: "",
-    desc: "",
-    thumbnail: "",
-    link: "",
-  });
+  const [post, setPost] = useState(
+    postObj
+      ? postObj
+      : {
+          userId: parseInt(localStorage.getItem("trb_user")),
+          postTypeId: postTypeIds[postType],
+          title: "",
+          desc: "",
+          thumbnail: "",
+          link: "",
+        }
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addPostFunc(post).then(() => {
+    if (post.id) {
+      // if the post already has an ID, PUT it
+      putPostFunc(post).then(() => {
+        setDisplayForm(false);
+        // tell the parent which post we just finished editing
+        renderCallback(post.id);
+      });
+    } else {
+      addPostFunc(post).then(() => {
+        setDisplayForm(false);
+        renderCallback();
+      });
+    }
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    if (post.id) {
+      renderCallback(post.id);
+    } else {
       setDisplayForm(false);
-      triggerRender();
-    });
+    }
   };
 
   const handleControlledChange = (e) => {
@@ -33,7 +56,7 @@ export const PostForm = ({
     setPost(newPostCopy);
   };
 
-  const TextField = ({ fieldFor, fieldLabel, postType, controlledChange }) => (
+  const TextField = ({ fieldFor, fieldLabel, controlledChange }) => (
     <fieldset>
       <label>
         {fieldLabel}
@@ -50,7 +73,7 @@ export const PostForm = ({
     </fieldset>
   );
 
-  return !displayForm ? (
+  return !displayForm && !postObj ? (
     <Box isForm={true} boxStyle={boxStyle}>
       <button onClick={() => setDisplayForm(true)}>Add a {postType}</button>
     </Box>
@@ -61,14 +84,12 @@ export const PostForm = ({
         {TextField({
           fieldFor: "title",
           fieldLabel: "Title:",
-          postType: postType,
           controlledChange: handleControlledChange,
         })}
 
         {TextField({
           fieldFor: "desc",
           fieldLabel: "Description:",
-          postType: postType,
           controlledChange: handleControlledChange,
         })}
 
@@ -77,18 +98,19 @@ export const PostForm = ({
             {TextField({
               fieldFor: "link",
               fieldLabel: "Link:",
-              postType: postType,
               controlledChange: handleControlledChange,
             })}
             {TextField({
               fieldFor: "thumbnail",
               fieldLabel: "Thumbnail Link:",
-              postType: postType,
               controlledChange: handleControlledChange,
             })}
           </>
         )}
-        <button onClick={handleSubmit}>Submit</button>
+        <div>
+          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleCancel}>Cancel</button>
+        </div>
       </form>
     </Box>
   );

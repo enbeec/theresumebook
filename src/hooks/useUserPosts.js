@@ -35,13 +35,23 @@ function useUserPosts(userId) {
     });
   }
 
+  function putPost(post) {
+    return fetch(postsURL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+  }
+
   function deletePost(postId) {
     return fetch(`${postsURL}/${postId}`, {
       method: "DELETE",
     });
   }
 
-  return { getPostsByType, addPost, deletePost, postTypeIds };
+  return { getPostsByType, addPost, deletePost, putPost, postTypeIds };
 }
 
 export default useUserPosts;
