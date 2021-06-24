@@ -11,34 +11,64 @@ export const PostsList = ({
   containerStyle,
   thumbnail,
 }) => {
-  const { getPostsByType, addPost, deletePost, postTypeIds } =
+  const { getPostsByType, addPost, deletePost, putPost, postTypeIds } =
     useUserPosts(userId);
 
-  // we can update this random value (which gets placed in the useEffect dep array)
-  //  to trigger a re-render by passing `rerender` to a child
-  const [random, setRandom] = useState(0);
-  const rerender = () => {
-    setRandom(Math.random());
+  // TODO this def could be a custom hook
+  const [editingPostIds, setEditingPostIds] = useState([]);
+  // https://ganes.dev/use-javascript-sets-with-react-useState
+  const edit = (postId) => {
+    const postIdSet = new Set(editingPostIds);
+    if (!postIdSet.has(postId)) {
+      postIdSet.add(postId);
+      setEditingPostIds(postIdSet);
+    }
+  };
+  const doneEditing = (postId) => {
+    const postIdSet = new Set(editingPostIds);
+    if (postIdSet.has(postId)) {
+      postIdSet.delete(postId);
+      setEditingPostIds([...postIdSet]);
+    } else if (postId === undefined) {
+      // for new posts, just call without an id
+      setEditingPostIds([...postIdSet]);
+    }
   };
 
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     getPostsByType(postType).then(setPosts);
-  }, [random]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [editingPostIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const boxedPost = (p) => (
-    <Box boxStyle={boxStyle} key={p.id}>
-      <SubHeading> {p.title}</SubHeading>
-      {thumbnail && (
-        <a href={p.link} target="_blank" rel="noreferrer">
-          <Image src={p.thumbnail} />
-        </a>
-      )}
-      <Text>{p.desc}</Text>
-      <br />
-      <button onClick={() => deletePost(p.id).then(rerender)}>Delete</button>
-    </Box>
-  );
+  const boxedPost = (p) =>
+    [...editingPostIds].indexOf(p.id) >= 0 ? (
+      <PostForm
+        postType={postType}
+        postObj={p}
+        Box={Box}
+        boxStyle={boxStyle}
+        renderCallback={doneEditing}
+        addPostFunc={addPost}
+        postTypeIds={postTypeIds}
+        putPostFunc={putPost}
+      />
+    ) : (
+      <Box boxStyle={boxStyle} key={p.id}>
+        <SubHeading> {p.title}</SubHeading>
+        {thumbnail && (
+          <a href={p.link} target="_blank" rel="noreferrer">
+            <Image src={p.thumbnail} />
+          </a>
+        )}
+        <Text>{p.desc}</Text>
+        <div>
+          <button onClick={() => edit(p.id)}>Edit</button>
+          <button onClick={() => deletePost(p.id).then(doneEditing())}>
+            Delete
+          </button>
+        </div>
+      </Box>
+    );
 
   return (
     <Container containerStyle={containerStyle}>
@@ -48,9 +78,10 @@ export const PostsList = ({
         postType={postType}
         Box={Box}
         boxStyle={boxStyle}
-        triggerRender={rerender}
+        renderCallback={doneEditing}
         addPostFunc={addPost}
         postTypeIds={postTypeIds}
+        putPostFunc={putPost}
       />
     </Container>
   );
