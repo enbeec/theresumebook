@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { PostContext } from "../PostProvider";
-import styled, { css } from "styled-components";
+import React from "react";
+import { css } from "styled-components";
 import { PostsList } from "../PostsList";
 
 export const ProjectsList = ({ ...props }) => {

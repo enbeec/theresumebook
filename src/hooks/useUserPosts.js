@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function useUserPosts(userId) {
-  const [postTypeIds, setPostTypeIds] = useState({
+  const [postTypeIds] = useState({
     exp: 1,
     skill: 2,
     project: 3,
@@ -19,10 +19,22 @@ function useUserPosts(userId) {
         return fetch(url("skill")).then((res) => res.json());
       case "project":
         return fetch(url("project")).then((res) => res.json());
+      default:
+        return;
     }
   }
 
-  return { getPostsByType };
+  function addPost(post) {
+    return fetch(postsURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+  }
+
+  return { getPostsByType, addPost, postTypeIds };
 }
 
 export default useUserPosts;

@@ -11,7 +11,9 @@ export const PostsList = ({
   containerStyle,
   thumbnail,
 }) => {
-  const { getPostsByType } = useUserPosts(userId);
+  const { getPostsByType, addPost, postTypeIds } = useUserPosts(userId);
+  // we can update this random value (which gets placed in the useEffect dep array)
+  //  to trigger a re-render by passing `rerender` to a child
   const [random, setRandom] = useState(0);
   const rerender = () => {
     setRandom(Math.random());
@@ -20,7 +22,7 @@ export const PostsList = ({
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     getPostsByType(postType).then(setPosts);
-  }, [random]);
+  }, [random]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const boxedPost = (p) => (
     <Box boxStyle={boxStyle} key={p.id}>
@@ -43,6 +45,8 @@ export const PostsList = ({
         Box={Box}
         boxStyle={boxStyle}
         triggerRender={rerender}
+        addPostFunc={addPost}
+        postTypeIds={postTypeIds}
       />
     </Container>
   );

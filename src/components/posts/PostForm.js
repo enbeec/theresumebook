@@ -1,11 +1,15 @@
-import React, { useContext, useState } from "react";
-import styled from "styled-components";
-import { PostContext } from "./PostProvider";
+import React, { useState } from "react";
 
-export const PostForm = ({ Box, boxStyle, postType, triggerRender }) => {
-  const { addPost, postTypeIds } = useContext(PostContext);
+export const PostForm = ({
+  Box,
+  boxStyle,
+  postType,
+  triggerRender,
+  // TODO /FIXME PASSING THESE TWO DOWN VIA PROPS IS UGLY
+  addPostFunc,
+  postTypeIds,
+}) => {
   const [displayForm, setDisplayForm] = useState(false);
-
   const [post, setPost] = useState({
     userId: localStorage.getItem("trb_user"),
     postTypeId: postTypeIds[postType],
@@ -17,7 +21,7 @@ export const PostForm = ({ Box, boxStyle, postType, triggerRender }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addPost(postType, post).then(() => {
+    addPostFunc(post).then(() => {
       setDisplayForm(false);
       triggerRender();
     });
