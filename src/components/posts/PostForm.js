@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { PostContext } from "./PostProvider";
 
-export const PostForm = ({ Box, boxStyle, postType, updatedFunc }) => {
+export const PostForm = ({ Box, boxStyle, postType, triggerRender }) => {
   const { addPost, postTypeIds } = useContext(PostContext);
   const [displayForm, setDisplayForm] = useState(false);
 
@@ -19,8 +19,7 @@ export const PostForm = ({ Box, boxStyle, postType, updatedFunc }) => {
     e.preventDefault();
     addPost(postType, post).then(() => {
       setDisplayForm(false);
-      // TODO this is very unclear
-      updatedFunc(postType);
+      triggerRender();
     });
   };
 
@@ -54,6 +53,7 @@ export const PostForm = ({ Box, boxStyle, postType, updatedFunc }) => {
   ) : (
     <Box isForm={true} boxStyle={boxStyle}>
       <form>
+        {/* TextFields must be called like this to avoid losing focus on rerender */}
         {TextField({
           fieldFor: "title",
           fieldLabel: "Title:",
@@ -61,29 +61,27 @@ export const PostForm = ({ Box, boxStyle, postType, updatedFunc }) => {
           controlledChange: handleControlledChange,
         })}
 
-        {/* TODO change this to a regular JSX function call */}
-        <TextField
-          fieldFor={"desc"}
-          fieldLabel={"Description:"}
-          postType={postType}
-          controlledChange={handleControlledChange}
-        />
+        {TextField({
+          fieldFor: "desc",
+          fieldLabel: "Description:",
+          postType: postType,
+          controlledChange: handleControlledChange,
+        })}
+
         {postType === "project" && (
           <>
-            {/* TODO change this to a regular JSX function call */}
-            <TextField
-              fieldFor={"link"}
-              fieldLabel={"Link:"}
-              postType={postType}
-              controlledChange={handleControlledChange}
-            />
-            {/* TODO change this to a regular JSX function call */}
-            <TextField
-              fieldFor={"thumbnail"}
-              fieldLabel={"Thumbnail Link:"}
-              postType={postType}
-              controlledChange={handleControlledChange}
-            />
+            {TextField({
+              fieldFor: "link",
+              fieldLabel: "Link:",
+              postType: postType,
+              controlledChange: handleControlledChange,
+            })}
+            {TextField({
+              fieldFor: "thumbnail",
+              fieldLabel: "Thumbnail Link:",
+              postType: postType,
+              controlledChange: handleControlledChange,
+            })}
           </>
         )}
         <button onClick={handleSubmit}>Submit</button>

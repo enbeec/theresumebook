@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { PostForm } from "./PostForm";
 import useUserPosts from "../../hooks/useUserPosts";
@@ -11,9 +11,16 @@ export const PostsList = ({
   containerStyle,
   thumbnail,
 }) => {
-  const { postsOfType, updatedPosts } = useUserPosts(userId);
-  const posts = postsOfType(postType);
-  console.log(posts);
+  const { getPostsByType } = useUserPosts(userId);
+  const [random, setRandom] = useState(0);
+  const rerender = () => {
+    setRandom(Math.random());
+  };
+
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    getPostsByType(postType).then(setPosts);
+  }, [random]);
 
   const boxedPost = (p) => (
     <Box boxStyle={boxStyle} key={p.id}>
@@ -35,7 +42,7 @@ export const PostsList = ({
         postType={postType}
         Box={Box}
         boxStyle={boxStyle}
-        updatedFunc={updatedPosts}
+        triggerRender={rerender}
       />
     </Container>
   );
