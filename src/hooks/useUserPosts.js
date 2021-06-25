@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-function useUserPosts(userId) {
+const useUserPosts = (userId) => {
+  // new post types can be added updated on the fly even though I don't need that yet
   const [postTypeIds] = useState({
     exp: 1,
     skill: 2,
@@ -8,18 +9,19 @@ function useUserPosts(userId) {
   });
 
   const postsURL = "http://localhost:6501/posts";
-  // TODO rename this function
-  const url = (postType) =>
+
+  // create the proper URL for GETting a type of post
+  const urlFor = (postType) =>
     `${postsURL}?postTypeId=${postTypeIds[postType]}&userId=${userId}`;
 
   function getPostsByType(postType) {
     switch (postType) {
       case "exp":
-        return fetch(url("exp")).then((res) => res.json());
+        return fetch(urlFor("exp")).then((res) => res.json());
       case "skill":
-        return fetch(url("skill")).then((res) => res.json());
+        return fetch(urlFor("skill")).then((res) => res.json());
       case "project":
-        return fetch(url("project")).then((res) => res.json());
+        return fetch(urlFor("project")).then((res) => res.json());
       default:
         return;
     }
@@ -52,6 +54,6 @@ function useUserPosts(userId) {
   }
 
   return { getPostsByType, addPost, deletePost, putPost, postTypeIds };
-}
+};
 
 export default useUserPosts;
