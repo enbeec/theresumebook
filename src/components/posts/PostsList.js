@@ -74,9 +74,6 @@ export const PostsList = ({
 
   return (
     <Container containerStyle={containerStyle}>
-      {headerText && [...posts].length === 0 && (
-        <Heading> {headerText} </Heading>
-      )}
       {posts.map(boxedPost)}
       {isCurrentUser && (
         <PostForm
