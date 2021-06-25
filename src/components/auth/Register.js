@@ -35,7 +35,7 @@ export const Register = (props) => {
           .then((createdUser) => {
             if (createdUser.hasOwnProperty("id")) {
               localStorage.setItem("trb_user", createdUser.id);
-              history.push("/");
+              history.push(`/resume/${createdUser.id}`);
             }
           });
       } else {
@@ -45,8 +45,9 @@ export const Register = (props) => {
   };
 
   // QUESTION is there a better way to achieve this?
-  if (localStorage.getItem("trb_user")) {
-    return <Redirect to="/" />;
+  const currentUserId = parseInt(localStorage.getItem("trb_user"));
+  if (currentUserId) {
+    return <Redirect to={`/resume/${currentUserId}`} />;
   } else {
     return (
       <main style={{ textAlign: "center" }}>

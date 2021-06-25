@@ -9,7 +9,8 @@ export const UserProvider = (props) => {
   const [currentUser, setCurrentUser] = useState({});
 
   const getUsers = () => {
-    return fetch(usersURL)
+    // FIXME this isnt returning posts inside the user objects :(
+    return fetch(`${usersURL}?_embed=posts`)
       .then((res) => res.json())
       .then(setUsers);
   };

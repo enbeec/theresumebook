@@ -21,7 +21,7 @@ export const Login = (props) => {
     existingUserCheck().then((exists) => {
       if (exists) {
         localStorage.setItem("trb_user", exists.id);
-        history.push("/");
+        history.push(`/resume/${exists.id}`);
       } else {
         existDialog.current.showModal();
       }
@@ -29,8 +29,9 @@ export const Login = (props) => {
   };
 
   // QUESTION is there a better way to achieve this?
-  if (localStorage.getItem("trb_user")) {
-    return <Redirect to="/" />;
+  const currentUserId = parseInt(localStorage.getItem("trb_user"));
+  if (currentUserId) {
+    return <Redirect to={`/resume/${currentUserId}`} />;
   } else {
     return (
       <main className="container--login">

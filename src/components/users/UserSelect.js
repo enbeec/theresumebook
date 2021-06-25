@@ -7,7 +7,8 @@ export const UserSelect = ({ selectFunc }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    getUsers();
+    // ** see fixme in UserProvider.js
+    getUsers(); //.then(users => users.filter(u => u.posts.length >= 1));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filterChange = (event) => setSearchTerm(event.target.value);

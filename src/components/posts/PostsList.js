@@ -35,10 +35,9 @@ export const PostsList = ({
   };
 
   const [posts, setPosts] = useState([]);
-  var postsEmpty = [...posts].length === 0;
+
   useEffect(() => {
     getPostsByType(postType).then(setPosts);
-    postsEmpty = [...posts].length === 0;
   }, [editingPostIds, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const boxedPost = (p) =>
@@ -75,7 +74,9 @@ export const PostsList = ({
 
   return (
     <Container containerStyle={containerStyle}>
-      {headerText && !postsEmpty && <Heading> {headerText} </Heading>}
+      {headerText && [...posts].length === 0 && (
+        <Heading> {headerText} </Heading>
+      )}
       {posts.map(boxedPost)}
       {isCurrentUser && (
         <PostForm
