@@ -9,6 +9,7 @@ export const PostsList = ({
   postType,
   boxStyle,
   containerStyle,
+  isCurrentUser,
   thumbnail,
 }) => {
   const { getPostsByType, addPost, deletePost, putPost, postTypeIds } =
@@ -19,11 +20,9 @@ export const PostsList = ({
   // https://ganes.dev/use-javascript-sets-with-react-useState
   const edit = (postId) => {
     const postIdSet = new Set(editingPostIds);
-    if (!postIdSet.has(postId)) {
-      postIdSet.add(postId);
-      setEditingPostIds(postIdSet);
-    }
+    setEditingPostIds(postIdSet.add(postId));
   };
+
   const doneEditing = (postId) => {
     const postIdSet = new Set(editingPostIds);
     if (postIdSet.has(postId)) {
@@ -36,12 +35,14 @@ export const PostsList = ({
   };
 
   const [posts, setPosts] = useState([]);
+  var postsEmpty = [...posts].length === 0;
   useEffect(() => {
     getPostsByType(postType).then(setPosts);
-  }, [editingPostIds]); // eslint-disable-line react-hooks/exhaustive-deps
+    postsEmpty = [...posts].length === 0;
+  }, [editingPostIds, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const boxedPost = (p) =>
-    [...editingPostIds].indexOf(p.id) >= 0 ? (
+    [...editingPostIds].indexOf(p.id) >= 0 && isCurrentUser ? (
       <PostForm
         postType={postType}
         postObj={p}
@@ -61,28 +62,32 @@ export const PostsList = ({
           </a>
         )}
         <Text>{p.desc}</Text>
-        <div>
-          <button onClick={() => edit(p.id)}>Edit</button>
-          <button onClick={() => deletePost(p.id).then(doneEditing())}>
-            Delete
-          </button>
-        </div>
+        {isCurrentUser && (
+          <div>
+            <button onClick={() => edit(p.id)}>Edit</button>
+            <button onClick={() => deletePost(p.id).then(doneEditing())}>
+              Delete
+            </button>
+          </div>
+        )}
       </Box>
     );
 
   return (
     <Container containerStyle={containerStyle}>
-      {headerText && <Heading> {headerText} </Heading>}
+      {headerText && !postsEmpty && <Heading> {headerText} </Heading>}
       {posts.map(boxedPost)}
-      <PostForm
-        postType={postType}
-        Box={Box}
-        boxStyle={boxStyle}
-        renderCallback={doneEditing}
-        addPostFunc={addPost}
-        postTypeIds={postTypeIds}
-        putPostFunc={putPost}
-      />
+      {isCurrentUser && (
+        <PostForm
+          postType={postType}
+          Box={Box}
+          boxStyle={boxStyle}
+          renderCallback={doneEditing}
+          addPostFunc={addPost}
+          postTypeIds={postTypeIds}
+          putPostFunc={putPost}
+        />
+      )}
     </Container>
   );
 };
