@@ -74,6 +74,7 @@ export const PostForm = ({
     </fieldset>
   );
 
+  // implement the custom hook useClickOutside to tell the postlist we're done editing
   const clickRef = useRef();
   useClickOutside(clickRef, () => {
     renderCallback(post.id ? post.id : undefined);
