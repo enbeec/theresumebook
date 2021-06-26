@@ -43,8 +43,9 @@
       "id": 1,
       "postId": 4,
       "postTypeId": 3,
-      "userId": 1,
-      "text": "cool post"
+      "postAuthorId": 1,
+      "userId": 2,
+      "text": "this is a comment from user 2"
     }
   ],
   "PostTypes": [

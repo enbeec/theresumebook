@@ -28,21 +28,22 @@ export const CommentSection = ({ foreignKeys, ...props }) => {
     return `http://localhost:6501/comments${params}`;
   };
 
-  const [url] = useState(makeURL(foreignKeys));
+  const fetchComments = () =>
+    fetch(makeURL(foreignKeys)).then((res) => res.json());
 
-  // useQuery needs a unique key -- we use the urlParams
-  const { isLoading, error, comments } = useQuery("foo", () =>
-    fetch(url).then((res) => res.json())
+  // useQuery needs a unique key
+  const { isLoading, error, data } = useQuery(
+    JSON.stringify(foreignKeys),
+    fetchComments
   );
+
+  const comments = data;
 
   return isLoading ? (
     <div>...loading...</div>
   ) : error ? (
     <div>ERROR</div>
   ) : (
-    <div style={{ textAlign: "center" }}>
-      The Comments: <br />
-      {JSON.stringify(comments, null, "\t")}{" "}
-    </div>
+    <div style={{ textAlign: "center" }}>{comments.map((c) => c.text)}</div>
   );
 };

@@ -13,11 +13,6 @@ export const Resume = () => {
 
   return (
     <ResumeContainer>
-      <CommentSection
-        foreignKeys={{
-          userId: 1,
-        }}
-      />
       <ProjectsList userId={userId} isCurrentUser={isCurrentUser} />
       <VerticalSplit>
         <SkillsList userId={userId} isCurrentUser={isCurrentUser} />
