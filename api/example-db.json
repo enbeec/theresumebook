@@ -45,7 +45,26 @@
       "postTypeId": 3,
       "postAuthorId": 1,
       "userId": 2,
-      "text": "this is a comment from user 2"
+      "text": "oh wow I'm gonna use this!"
+    },
+    {
+      "id": 2,
+      "postTypeId": 1,
+      "userId": 2,
+      "postAuthorId": 1,
+      "text": "I have a cousin that went to Syracuse, too. Neat."
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
     }
   ],
   "PostTypes": [

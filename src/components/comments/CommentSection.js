@@ -9,7 +9,20 @@ export const CommentSection = ({ foreignKeys, ...props }) => {
     <div>ERROR</div>
   ) : (
     <div style={{ textAlign: "center" }}>
-      {comments.data.map((c) => c.text)}
+      {comments.data.map((c) => (
+        <>
+          <span>{c.text}</span>
+          <div
+            style={{
+              textAlign: "right",
+              paddingRight: "4rem",
+              color: "darkgrey",
+            }}
+          >
+            -- User #{c.userId}
+          </div>
+        </>
+      ))}
     </div>
   );
 };

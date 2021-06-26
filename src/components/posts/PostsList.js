@@ -3,10 +3,10 @@ import styled, { css } from "styled-components";
 import { PostForm } from "./PostForm";
 import useUserPosts from "../../hooks/useUserPosts";
 import useSet from "../../hooks/useSet";
+import { CommentSection } from "../comments/CommentSection";
 
 export const PostsList = ({
   userId,
-  headerText,
   postType,
   boxStyle,
   containerStyle,
@@ -16,6 +16,8 @@ export const PostsList = ({
   const { getPostsByType, addPost, deletePost, putPost, postTypeIds } =
     useUserPosts(userId);
 
+  const postTypeId = postTypeIds[postType];
+
   const [editingPostIds, edit, doneEditing] = useSet();
 
   const [posts, setPosts] = useState([]);
@@ -24,6 +26,7 @@ export const PostsList = ({
     getPostsByType(postType).then(setPosts);
   }, [editingPostIds, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // TODO decide if I wanna factor this out into a component
   const boxedPost = (p) =>
     [...editingPostIds].indexOf(p.id) >= 0 && isCurrentUser ? (
       <PostForm
@@ -54,6 +57,11 @@ export const PostsList = ({
             </button>
           </div>
         )}
+        {postTypeId === 3 && (
+          <CommentSection
+            foreignKeys={{ postId: p.id, postTypeId: postTypeId }}
+          />
+        )}
       </Box>
     );
 
@@ -71,6 +79,11 @@ export const PostsList = ({
           putPostFunc={putPost}
         />
       )}
+      {postTypeId !== 3 && (
+        <CommentSection
+          foreignKeys={{ postTypeId: postTypeId, authorUserId: userId }}
+        />
+      )}
     </Container>
   );
 };
@@ -80,10 +93,6 @@ const Image = styled.img`
   padding-top: 1rem;
   padding-bottom: 1rem;
 `;
-
-// const Heading = styled.h2`
-//   text-align: center;
-// `;
 
 const SubHeading = styled.h4`
   text-align: center;
