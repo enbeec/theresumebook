@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import useClickOutside from "../../hooks/useClickOutside";
 
 export const PostForm = ({
   Box,
@@ -73,12 +74,22 @@ export const PostForm = ({
     </fieldset>
   );
 
+  // implement the custom hook useClickOutside to tell the postlist we're done editing
+  const clickRef = useRef();
+  useClickOutside(clickRef, () => {
+    renderCallback(post.id ? post.id : undefined);
+  });
+
+  /* test for NO postObj (indicates editing rather than creating) and
+      NOT our minimode state -- if that is the case, render minimode
+    OTHERWISE render the form with the clickRef used to close the form
+  */
   return !displayForm && !postObj ? (
     <Box isForm={true} boxStyle={boxStyle}>
       <button onClick={() => setDisplayForm(true)}>Add a {postType}</button>
     </Box>
   ) : (
-    <Box isForm={true} boxStyle={boxStyle}>
+    <Box isForm={true} boxStyle={boxStyle} ref={clickRef}>
       <form>
         {/* TextFields must be called like this to avoid losing focus on rerender */}
         {TextField({
