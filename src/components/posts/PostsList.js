@@ -44,6 +44,7 @@ export const PostsList = ({
     [...editingPostIds].indexOf(p.id) >= 0 && isCurrentUser ? (
       <PostForm
         postType={postType}
+        key={p.id}
         postObj={p}
         Box={Box}
         boxStyle={boxStyle}
@@ -96,9 +97,9 @@ const Image = styled.img`
   padding-bottom: 1rem;
 `;
 
-const Heading = styled.h2`
-  text-align: center;
-`;
+// const Heading = styled.h2`
+//   text-align: center;
+// `;
 
 const SubHeading = styled.h4`
   text-align: center;
