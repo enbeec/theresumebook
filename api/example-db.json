@@ -4,6 +4,16 @@
       "id": 1,
       "name": "Val Currie",
       "email": "val@currie.com"
+    },
+    {
+      "id": 2,
+      "name": "Chris James",
+      "email": "chris@james.com"
+    },
+    {
+      "id": "3",
+      "name": "User Name",
+      "email": "user@name.com"
     }
   ],
   "Posts": [
