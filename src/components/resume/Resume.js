@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { ProjectsList } from "../posts/projects/ProjectsList";
 import { SkillsList } from "../posts/skills/SkillsList";
 import { ExpsList } from "../posts/exps/ExpsList";
+import { CommentSection } from "../comments/CommentSection";
 import styled from "styled-components";
 
 export const Resume = () => {
@@ -12,6 +13,11 @@ export const Resume = () => {
 
   return (
     <ResumeContainer>
+      <CommentSection
+        foreignKeys={{
+          userId: 1,
+        }}
+      />
       <ProjectsList userId={userId} isCurrentUser={isCurrentUser} />
       <VerticalSplit>
         <SkillsList userId={userId} isCurrentUser={isCurrentUser} />

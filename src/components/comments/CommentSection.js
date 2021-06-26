@@ -40,6 +40,9 @@ export const CommentSection = ({ foreignKeys, ...props }) => {
   ) : error ? (
     <div>ERROR</div>
   ) : (
-    <div>{JSON.stringify(comments, null, "\t")} </div>
+    <div style={{ textAlign: "center" }}>
+      The Comments: <br />
+      {JSON.stringify(comments, null, "\t")}{" "}
+    </div>
   );
 };
