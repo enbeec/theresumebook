@@ -38,7 +38,15 @@
       "thumbnail": "https://vcvcvc-dev.us-east-1.linodeobjects.com/djscreenshot.png"
     }
   ],
-  "Comments": [],
+  "Comments": [
+    {
+      "id": 1,
+      "postId": 4,
+      "postTypeId": 3,
+      "userId": 1,
+      "text": "cool post"
+    }
+  ],
   "PostTypes": [
     {
       "id": 1,

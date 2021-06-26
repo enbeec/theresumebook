@@ -7,6 +7,7 @@ import { Register } from "./auth/Register";
 import { NavBar } from "./nav/NavBar";
 import { UserProvider } from "./users/UserProvider";
 import { ApplicationViews } from "./ApplicationViews";
+import { CommentSection } from "./comments/CommentSection";
 
 export const ResumeBook = () => (
   <>
@@ -18,6 +19,11 @@ export const ResumeBook = () => (
             <ThemeProvider theme={theme}>
               <UserProvider>
                 <NavBar />
+                <CommentSection
+                  foreignKeys={{
+                    userId: 1,
+                  }}
+                />
                 <ApplicationViews />
               </UserProvider>
             </ThemeProvider>
