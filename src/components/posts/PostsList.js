@@ -7,12 +7,11 @@ import {
   SubHeading,
   Text,
   Image,
-} from "../theme/themedComponents";
+} from "../../theme/themedComponents";
 import { PostForm } from "./PostForm";
 
 export const PostsList = ({
   userId,
-  headerText,
   postType,
   boxStyle,
   containerStyle,

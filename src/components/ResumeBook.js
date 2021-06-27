@@ -1,7 +1,8 @@
 import React from "react";
-import { ThemeProvider } from "styled-components";
-import { theme } from "./theme/theme";
 import { Route, Redirect } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../theme/theme";
+import { GlobalStyles } from "../theme/GlobalStyles";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import { NavBar } from "./nav/NavBar";
@@ -17,6 +18,7 @@ export const ResumeBook = () => (
           return (
             <ThemeProvider theme={theme}>
               <UserProvider>
+                <GlobalStyles />
                 <NavBar />
                 <ApplicationViews />
               </UserProvider>
