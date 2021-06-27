@@ -6,4 +6,5 @@ export const theme = {
     lavender: "lavender",
     azure: "azure",
   },
+  radii: ["5px", "10px", "18px"],
 };

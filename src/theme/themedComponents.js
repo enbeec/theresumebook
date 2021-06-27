@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { fontFaces } from "./fonts";
 
 export const Image = styled.img`
   max-width: 80%;
@@ -17,7 +16,9 @@ export const Text = styled.span`
 `;
 
 export const Container = styled.div`
-  border-radius: 20px;
+  ${({ theme }) => css`
+    border-radius: ${theme.radii[2]};
+  `}
   ${(props) =>
     props.containerStyle
       ? props.containerStyle
@@ -33,8 +34,8 @@ export const Container = styled.div`
 `;
 
 export const Box = styled.div`
-  border-radius: 10px;
   ${({ theme }) => css`
+    border-radius: ${theme.radii[1]};
     background: ${theme.colors.azure};
   `}
 
