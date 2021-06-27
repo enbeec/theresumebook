@@ -45,9 +45,9 @@ export const Box = styled.div`
       ? props.boxStyle
       : css`
           margin: 0.5rem;
-          padding-top: 1rem;
-          padding-right: 1rem;
-          padding-left: 1rem;
+          padding-top: 0.5rem;
+          padding-right: 0.5rem;
+          padding-left: 0.5rem;
           text-align: center;
           min-width: 70%;
           flex-grow: 1;
@@ -58,6 +58,7 @@ export const Box = styled.div`
   ${(props) =>
     props.isForm &&
     css`
+      padding: 0.5rem;
       background: ${props.theme.colors.lavender};
       justify-content: center;
       opacity: 40%;
@@ -66,4 +67,46 @@ export const Box = styled.div`
         opacity: 100%;
       }
     `}
+`;
+
+export const FlexBar = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 2rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.5rem;
+  margin: 0;
+`;
+
+export const BarSection = styled.div`
+  ${(props) => css`
+    align-items: ${props.alignItems || "center"};
+  `}
+  /* PARENT */
+  display: flex;
+  flex-flow: column;
+  /* CHILD */
+  flex-basis: 20%;
+`;
+
+export const LogoutButton = styled.button`
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.5rem;
+  border-width: 0.2rem;
+  border-style: inset;
+  background-color: lightgrey;
+  color: black;
+  /* outline: coral solid 1px; */
+  :hover {
+    color: coral;
+    outline: black solid 0px;
+    box-shadow: -1px 2px darkgrey;
+  }
+  :active {
+    background: coral;
+    color: white;
+  }
 `;
