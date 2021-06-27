@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { PostForm } from "./PostForm";
+import useSet from "../../hooks/useSet";
 import useUserPosts from "../../hooks/useUserPosts";
 import {
   Box,
@@ -8,6 +8,7 @@ import {
   Text,
   Image,
 } from "../theme/themedComponents";
+import { PostForm } from "./PostForm";
 
 export const PostsList = ({
   userId,
@@ -21,24 +22,7 @@ export const PostsList = ({
   const { getPostsByType, addPost, deletePost, putPost, postTypeIds } =
     useUserPosts(userId);
 
-  // TODO this def could be a custom hook
-  const [editingPostIds, setEditingPostIds] = useState([]);
-  // https://ganes.dev/use-javascript-sets-with-react-useState
-  const edit = (postId) => {
-    const postIdSet = new Set(editingPostIds);
-    setEditingPostIds(postIdSet.add(postId));
-  };
-
-  const doneEditing = (postId) => {
-    const postIdSet = new Set(editingPostIds);
-    if (postIdSet.has(postId)) {
-      postIdSet.delete(postId);
-      setEditingPostIds([...postIdSet]);
-    } else if (postId === undefined) {
-      // for new posts, just call without an id
-      setEditingPostIds([...postIdSet]);
-    }
-  };
+  const [editingPostIds, edit, doneEditing] = useSet();
 
   const [posts, setPosts] = useState([]);
 
@@ -50,6 +34,7 @@ export const PostsList = ({
     [...editingPostIds].indexOf(p.id) >= 0 && isCurrentUser ? (
       <PostForm
         postType={postType}
+        key={p.id}
         postObj={p}
         Box={Box}
         boxStyle={boxStyle}
