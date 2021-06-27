@@ -33,6 +33,11 @@ export const Container = styled.div`
 
 export const Box = styled.div`
   border-radius: 10px;
+  ${({ theme }) => css`
+    background: ${theme.colors.azure};
+  `}
+
+  /* everything in the CSS fragment below can be overridden*/
   ${(props) =>
     props.boxStyle
       ? props.boxStyle
@@ -47,10 +52,11 @@ export const Box = styled.div`
           flex-shrink: 1;
         `}
 
+  /* extra styling for the form version of a box */
   ${(props) =>
     props.isForm &&
     css`
-      background: lavender;
+      background: ${props.theme.colors.lavender};
       justify-content: center;
       opacity: 40%;
       :hover,
