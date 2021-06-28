@@ -24,7 +24,7 @@ const useComments = (foreignKeys) => {
         params += `&${fk}=${foreignKeys[fk]}`;
       }
     }
-    return `http://localhost:6501/comments${params}`;
+    return `http://localhost:6501/comments${params}&_expand=user`;
   };
 
   const fetchComments = () =>

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import useComments from "../../hooks/useComments";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const CommentSection = ({ foreignKeys, ...props }) => {
   const comments = useComments(foreignKeys);
@@ -16,13 +18,23 @@ export const CommentSection = ({ foreignKeys, ...props }) => {
             style={{
               textAlign: "right",
               paddingRight: "4rem",
-              color: "darkgrey",
             }}
           >
-            -- User #{c.userId}
+            <ShadowLink to={`/resume/${c.user.id}`}>
+              {" "}
+              -- {c.user.name}
+            </ShadowLink>
           </div>
         </>
       ))}
     </div>
   );
 };
+
+const ShadowLink = styled(Link)`
+  text-decoration: none;
+  color: darkgrey;
+  :hover {
+    text-shadow: 0px 1px lightgrey;
+  }
+`;

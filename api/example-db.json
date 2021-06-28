@@ -1,5 +1,5 @@
 {
-  "Users": [
+  "users": [
     {
       "id": 1,
       "name": "Val Currie",
@@ -16,7 +16,7 @@
       "email": "user@name.com"
     }
   ],
-  "Posts": [
+  "posts": [
     {
       "id": 1,
       "userId": 1,
@@ -48,7 +48,7 @@
       "thumbnail": "https://vcvcvc-dev.us-east-1.linodeobjects.com/djscreenshot.png"
     }
   ],
-  "Comments": [
+  "comments": [
     {
       "id": 1,
       "postId": 4,
@@ -59,25 +59,14 @@
     },
     {
       "id": 2,
+      "postId": 3,
       "postTypeId": 1,
       "userId": 2,
       "postAuthorId": 1,
       "text": "I have a cousin that went to Syracuse, too. Neat."
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
     }
   ],
-  "PostTypes": [
+  "postTypes": [
     {
       "id": 1,
       "type": "exp"
