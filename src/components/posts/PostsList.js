@@ -17,6 +17,7 @@ export const PostsList = ({
   containerStyle,
   isCurrentUser,
   thumbnail,
+  ...props
 }) => {
   const { getPostsByType, addPost, deletePost, putPost, postTypeIds } =
     useUserPosts(userId);
@@ -74,6 +75,7 @@ export const PostsList = ({
           addPostFunc={addPost}
           postTypeIds={postTypeIds}
           putPostFunc={putPost}
+          {...props}
         />
       )}
     </Container>
