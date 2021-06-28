@@ -12,20 +12,20 @@ export const ProjectsList = ({ ...props }) => {
     flex-wrap: wrap;
     flex-grow: 1;
     flex-shrink: 1;
-    flex-basis: 30%;
     justify-content: space-evenly;
   `;
 
   const projectBoxStyle = css`
-    min-height: 10rem;
+    min-height: 9rem;
     margin: 0.5rem;
     padding-top: 1rem;
+    padding-bottom: 1rem;
     text-align: center;
     background: azure;
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-basis: 30%;
+    flex-basis: 40%;
     flex-grow: 0.15;
     flex-shrink: 1;
   `;

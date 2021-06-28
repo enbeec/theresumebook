@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
-import { PostForm } from "./PostForm";
-import useUserPosts from "../../hooks/useUserPosts";
 import useSet from "../../hooks/useSet";
+import useUserPosts from "../../hooks/useUserPosts";
+import {
+  Box,
+  Container,
+  SubHeading,
+  Text,
+  Image,
+} from "../../theme/themedComponents";
+import { PostForm } from "./PostForm";
 
 export const PostsList = ({
   userId,
-  headerText,
   postType,
   boxStyle,
   containerStyle,
   isCurrentUser,
   thumbnail,
+  ...props
 }) => {
   const { getPostsByType, addPost, deletePost, putPost, postTypeIds } =
     useUserPosts(userId);
@@ -47,7 +53,7 @@ export const PostsList = ({
         )}
         <Text>{p.desc}</Text>
         {isCurrentUser && (
-          <div>
+          <div style={{ paddingTop: "0.5rem" }}>
             <button onClick={() => edit(p.id)}>Edit</button>
             <button onClick={() => deletePost(p.id).then(doneEditing())}>
               Delete
@@ -69,72 +75,9 @@ export const PostsList = ({
           addPostFunc={addPost}
           postTypeIds={postTypeIds}
           putPostFunc={putPost}
+          {...props}
         />
       )}
     </Container>
   );
 };
-
-const Image = styled.img`
-  max-width: 80%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-`;
-
-// const Heading = styled.h2`
-//   text-align: center;
-// `;
-
-const SubHeading = styled.h4`
-  text-align: center;
-  margin: 0;
-`;
-
-const Text = styled.span`
-  text-align: center;
-`;
-
-const Container = styled.div`
-  border-radius: 20px;
-  ${(props) =>
-    props.containerStyle
-      ? props.containerStyle
-      : css`
-          flex-direction: column;
-          width: 50%;
-          margin: 0.2rem;
-          padding: 1rem;
-          align-items: center;
-          background: azure;
-          justify-content: space-around;
-        `};
-`;
-
-const Box = styled.div`
-  border-radius: 10px;
-  ${(props) =>
-    props.boxStyle
-      ? props.boxStyle
-      : css`
-          margin: 0.5rem;
-          padding-top: 1rem;
-          padding-right: 1rem;
-          padding-left: 1rem;
-          text-align: center;
-          min-width: 70%;
-          flex-grow: 1;
-          flex-shrink: 1;
-        `}
-
-  ${(props) =>
-    props.isForm &&
-    css`
-      background: lavender;
-      justify-content: center;
-      opacity: 40%;
-      :hover,
-      :focus-within {
-        opacity: 100%;
-      }
-    `}
-`;
