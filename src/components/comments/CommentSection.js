@@ -1,6 +1,6 @@
 import React from "react";
 import useComments from "../../hooks/useComments";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const CommentSection = ({ foreignKeys, ...props }) => {
@@ -10,9 +10,14 @@ export const CommentSection = ({ foreignKeys, ...props }) => {
   ) : comments.error ? (
     <div>ERROR</div>
   ) : (
-    <div style={{ textAlign: "center" }}>
+    // TODO make this a styled component
+    <div
+      style={{
+        textAlign: "center",
+      }}
+    >
       {comments.data.map((c) => (
-        <>
+        <Comment key={c.id}>
           <span>{c.text}</span>
           <div
             style={{
@@ -20,12 +25,9 @@ export const CommentSection = ({ foreignKeys, ...props }) => {
               paddingRight: "4rem",
             }}
           >
-            <ShadowLink to={`/resume/${c.user.id}`}>
-              {" "}
-              -- {c.user.name}
-            </ShadowLink>
+            <ShadowLink to={`/resume/${c.user.id}`}>{c.user.name}</ShadowLink>
           </div>
-        </>
+        </Comment>
       ))}
     </div>
   );
@@ -33,8 +35,20 @@ export const CommentSection = ({ foreignKeys, ...props }) => {
 
 const ShadowLink = styled(Link)`
   text-decoration: none;
-  color: darkgrey;
-  :hover {
-    text-shadow: 0px 1px lightgrey;
-  }
+  ${({ theme }) => css`
+    color: ${theme.colors.grey};
+    :hover {
+      color: ${theme.colors.grey};
+      text-shadow: 1px 1px 1px ${theme.colors.darkergrey};
+    }
+  `}
+`;
+
+const Comment = styled.div`
+  ${({ theme }) => css`
+    opacity: 90%;
+    :hover {
+      opacity: 100%;
+    }
+  `}
 `;
