@@ -7,6 +7,13 @@ export const GlobalStyles = createGlobalStyle`
 	body, select, button, input {
 		font-family: Iosevka;
 		font-style: normal;
+	}
+
+	body, button {
 		background: ${theme.colors.paleyellow}
+	}
+
+	button, select {
+		font-size: ${theme.fontSizes[2]}px;
 	}
 `;

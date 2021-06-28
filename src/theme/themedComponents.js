@@ -7,8 +7,12 @@ export const Image = styled.img`
 `;
 
 export const SubHeading = styled.h4`
+  ${({ theme }) => css`
+    font-size: ${theme.fontSizes[3]}px;
+  `}
   text-align: center;
   margin: 0.3rem;
+  margin-bottom: 0.6rem;
 `;
 
 export const Text = styled.span`
