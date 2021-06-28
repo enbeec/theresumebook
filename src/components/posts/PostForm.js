@@ -1,3 +1,4 @@
+import indefinite from "indefinite";
 import React, { useRef, useState } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
 
@@ -5,6 +6,7 @@ export const PostForm = ({
   Box,
   boxStyle,
   postType,
+  altPostType,
   renderCallback,
   addPostFunc,
   postTypeIds,
@@ -86,7 +88,9 @@ export const PostForm = ({
   */
   return !displayForm && !postObj ? (
     <Box isForm={true} boxStyle={boxStyle}>
-      <button onClick={() => setDisplayForm(true)}>Add a {postType}</button>
+      <button onClick={() => setDisplayForm(true)}>
+        Add {indefinite(altPostType || postType)}
+      </button>
     </Box>
   ) : (
     <Box isForm={true} boxStyle={boxStyle} ref={clickRef}>
