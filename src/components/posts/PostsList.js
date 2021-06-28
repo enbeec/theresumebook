@@ -52,7 +52,7 @@ export const PostsList = ({
         )}
         <Text>{p.desc}</Text>
         {isCurrentUser && (
-          <div>
+          <div style={{ paddingTop: "0.5rem" }}>
             <button onClick={() => edit(p.id)}>Edit</button>
             <button onClick={() => deletePost(p.id).then(doneEditing())}>
               Delete

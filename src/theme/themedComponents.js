@@ -8,7 +8,7 @@ export const Image = styled.img`
 
 export const SubHeading = styled.h4`
   text-align: center;
-  margin: 0;
+  margin: 0.3rem;
 `;
 
 export const Text = styled.span`
@@ -25,8 +25,8 @@ export const Container = styled.div`
       : css`
           flex-direction: column;
           width: 50%;
-          margin: 0.2rem;
-          padding: 1rem;
+          margin: 0.8rem;
+          padding: 0.5rem;
           align-items: center;
           background: azure;
           justify-content: space-around;
@@ -44,7 +44,7 @@ export const Box = styled.div`
     props.boxStyle
       ? props.boxStyle
       : css`
-          margin: 0.5rem;
+          margin: 1rem;
           padding-top: 0.5rem;
           padding-right: 0.5rem;
           padding-left: 0.5rem;
