@@ -19,4 +19,17 @@ export const theme = {
     regular: "Iosevka",
     medium: "Iosevka Medium",
   },
+  animations: {
+    opacityFade: (startPercent, customName) => `
+      @keyframes ${customName || "opacityFade"} {
+        from {
+          opacity: ${startPercent + "%" || "25%"};
+        }
+
+        to {
+          opacity: 100%;
+        }
+      }
+    `,
+  },
 };
