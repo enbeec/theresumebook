@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 
+// TODO rewrite this wihtout react-query -- I give up lol
 const useComments = (foreignKeys) => {
   /*
 		foreignKeys can have any of the following properties:

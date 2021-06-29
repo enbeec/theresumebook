@@ -11,7 +11,6 @@ export const CommentSection = ({ foreignKeys, ...props }) => {
   ) : comments.error ? (
     <div>ERROR</div>
   ) : (
-    // TODO make this a styled component
     <div
       style={{
         textAlign: "center",

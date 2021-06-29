@@ -1,6 +1,3 @@
-// TODO move common colors, spacing and variants into here
-//		I'm holding off to prevent spaghetti
-
 export const theme = {
   colors: {
     // TODO rename to purple
@@ -18,18 +15,5 @@ export const theme = {
   fonts: {
     regular: "Iosevka",
     medium: "Iosevka Medium",
-  },
-  animations: {
-    opacityFade: (startPercent, customName) => `
-      @keyframes ${customName || "opacityFade"} {
-        from {
-          opacity: ${startPercent + "%" || "25%"};
-        }
-
-        to {
-          opacity: 100%;
-        }
-      }
-    `,
   },
 };
