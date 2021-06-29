@@ -65,9 +65,12 @@ export const PostsList = ({
           </div>
         )}
         {postTypeId === 3 && (
-          <CommentSection
-            foreignKeys={{ postId: p.id, postTypeId: postTypeId }}
-          />
+          <>
+            <div style={{ margin: "0.2rem" }} />
+            <CommentSection
+              foreignKeys={{ postId: p.id, postTypeId: postTypeId }}
+            />
+          </>
         )}
       </Box>
     );
@@ -87,7 +90,7 @@ export const PostsList = ({
           {...props}
         />
       )}
-      {postTypeId !== 3 && (
+      {postType !== "project" && (
         <CommentSection
           foreignKeys={{ postTypeId: postTypeId, authorUserId: userId }}
         />

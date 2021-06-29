@@ -1,6 +1,7 @@
 import React from "react";
 import { css } from "styled-components";
 import { PostsList } from "../PostsList";
+import { theme } from "../../../theme/theme";
 
 export const ProjectsList = ({ ...props }) => {
   // projects are a little more complicated than skills or exps
@@ -16,16 +17,17 @@ export const ProjectsList = ({ ...props }) => {
   `;
 
   const projectBoxStyle = css`
+    flex-basis: 40%;
     min-height: 9rem;
     margin: 0.5rem;
+    padding: 0.8rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     text-align: center;
-    background: azure;
     display: flex;
+    background: ${theme.colors.lavender};
     flex-direction: column;
     align-items: center;
-    flex-basis: 40%;
     flex-grow: 0.15;
     flex-shrink: 1;
   `;

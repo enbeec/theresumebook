@@ -1,6 +1,22 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
+export const ResumeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const VerticalSplit = styled.div`
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 60%;
+  /* parent */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export const Image = styled.img`
   max-width: 80%;
   padding-top: 1rem;
@@ -109,7 +125,7 @@ export const LogoutButton = styled.button`
   :hover {
     color: coral;
     outline: black solid 0px;
-    box-shadow: -1px 2px darkgrey;
+    box-shadow: 1px 2px darkgrey;
   }
   :active {
     background: coral;
