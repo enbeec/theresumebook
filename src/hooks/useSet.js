@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // I'm using this to track which posts are being edited
 //	so no need for initial state
-const useSet = () => {
+export const useSet = () => {
   const [state, setState] = useState([]);
 
   // https://ganes.dev/use-javascript-sets-with-react-useState

@@ -59,7 +59,7 @@
     },
     {
       "id": 2,
-      "postId": 3,
+      "postId": 0,
       "postTypeId": 1,
       "userId": 2,
       "postAuthorId": 1,

@@ -29,11 +29,12 @@ export const PostsList = ({
 
   const [posts, setPosts] = useState([]);
 
+  const thereArePosts = () => posts.length >= 1;
+
   useEffect(() => {
     getPostsByType(postType).then(setPosts);
   }, [editingPostIds, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // TODO decide if I wanna factor this out into a component
   const boxedPost = (p) =>
     [...editingPostIds].indexOf(p.id) >= 0 && isCurrentUser ? (
       <PostForm
@@ -58,7 +59,12 @@ export const PostsList = ({
         <Text>{p.desc}</Text>
         {isCurrentUser && (
           <div style={{ paddingTop: "0.5rem" }}>
-            <button onClick={() => edit(p.id)}>Edit</button>
+            <button
+              style={{ marginRight: "0.1rem" }}
+              onClick={() => edit(p.id)}
+            >
+              Edit
+            </button>
             <button onClick={() => deletePost(p.id).then(doneEditing())}>
               Delete
             </button>
@@ -68,14 +74,24 @@ export const PostsList = ({
           <>
             <div style={{ margin: "0.2rem" }} />
             <CommentSection
-              foreignKeys={{ postId: p.id, postTypeId: postTypeId }}
+              foreignKeys={{
+                postId: p.id,
+                postTypeId: postTypeId,
+                authorUserId: userId,
+              }}
             />
           </>
         )}
       </Box>
     );
 
-  return (
+  return !thereArePosts() ? (
+    <Container>
+      <Box>
+        This user has not listed any {props.altPostType || postType}s (yet).
+      </Box>
+    </Container>
+  ) : (
     <Container containerStyle={containerStyle}>
       {posts.map(boxedPost)}
       {isCurrentUser && (

@@ -1,6 +1,5 @@
-import { useQuery } from "react-query";
+import { useState } from "react";
 
-// TODO rewrite this wihtout react-query -- I give up lol
 const useComments = (foreignKeys) => {
   /*
 		foreignKeys can have any of the following properties:
@@ -16,6 +15,7 @@ const useComments = (foreignKeys) => {
 			  postTypeId: 2			  
 		  }	
 	*/
+  const apiURL = "http://localhost:6501/comments";
   const makeURL = (foreignKeys) => {
     var params = "?";
     for (const fk in foreignKeys) {
@@ -25,14 +25,17 @@ const useComments = (foreignKeys) => {
         params += `&${fk}=${foreignKeys[fk]}`;
       }
     }
-    return `http://localhost:6501/comments${params}&_expand=user`;
+    return `${apiURL}${params}&_expand=user`;
   };
 
   const fetchComments = () =>
     fetch(makeURL(foreignKeys)).then((res) => res.json());
 
-  // useQuery needs a unique key
-  return useQuery(JSON.stringify(foreignKeys), fetchComments);
+  const deleteComment = (id) => fetch(`${apiURL}/${id}`, { method: "DELETE" });
+  const [comments, setComments] = useState([]);
+
+  // TODO this is not how I wanna return this stuff
+  return [comments, setComments, fetchComments, deleteComment];
 };
 
 export default useComments;

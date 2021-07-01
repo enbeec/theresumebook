@@ -124,7 +124,6 @@ export const PostForm = ({
         )}
         <div>
           <button onClick={handleSubmit}>Submit</button>
-          <button onClick={handleCancel}>Cancel</button>
         </div>
       </form>
     </Box>
