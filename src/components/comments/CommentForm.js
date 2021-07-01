@@ -114,7 +114,10 @@ export const CommentForm = ({
             onChange={handleControlledChange}
           />
         </fieldset>
-        <button onClick={handleSubmit}>Submit</button>
+        <button style={{ marginRight: "0.1rem" }} onClick={handleSubmit}>
+          Submit
+        </button>
+        <button onClick={handleCancel}>Cancel</button>
       </form>
     </CommentBox>
   );
