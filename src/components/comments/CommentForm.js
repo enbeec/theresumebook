@@ -35,6 +35,15 @@ export const CommentForm = ({
           text: "",
         }
   );
+  const initializeComment = () =>
+    setComment({
+      // we don't have a postId if the section is for an entire list of posts
+      postId: foreignKeys.postId || 0,
+      postTypeId: foreignKeys.postTypeId,
+      postAuthorId: foreignKeys.postTypeId,
+      userId: parseInt(localStorage.getItem("trb_user")),
+      text: "",
+    });
 
   const handleControlledChange = (e) => {
     const newCommentCopy = { ...comment };
@@ -51,6 +60,7 @@ export const CommentForm = ({
       // POST then setDisplayForm false and callback
       postComment(comment).then(() => {
         setDisplayForm(false);
+        initializeComment();
         renderCallback();
       });
     }
@@ -62,6 +72,7 @@ export const CommentForm = ({
       renderCallback(comment.id);
     } else {
       setDisplayForm(false);
+      initializeComment();
     }
   };
 

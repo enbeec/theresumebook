@@ -27,6 +27,16 @@ export const PostForm = ({
         }
   );
 
+  const initializePost = () =>
+    setPost({
+      userId: parseInt(localStorage.getItem("trb_user")),
+      postTypeId: postTypeIds[postType],
+      title: "",
+      desc: "",
+      thumbnail: "",
+      link: "",
+    });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (post.id) {
@@ -39,6 +49,7 @@ export const PostForm = ({
     } else {
       addPostFunc(post).then(() => {
         setDisplayForm(false);
+        initializePost();
         renderCallback();
       });
     }
@@ -50,6 +61,7 @@ export const PostForm = ({
       renderCallback(post.id);
     } else {
       setDisplayForm(false);
+      initializePost();
     }
   };
 
@@ -123,7 +135,10 @@ export const PostForm = ({
           </>
         )}
         <div>
-          <button onClick={handleSubmit}>Submit</button>
+          <button style={{ marginRight: "0.1rem" }} onClick={handleSubmit}>
+            Submit
+          </button>
+          <button onClick={handleCancel}>Cancel</button>
         </div>
       </form>
     </Box>
