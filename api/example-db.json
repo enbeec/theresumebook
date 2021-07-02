@@ -1,12 +1,22 @@
 {
-  "Users": [
+  "users": [
     {
       "id": 1,
       "name": "Val Currie",
       "email": "val@currie.com"
+    },
+    {
+      "id": 2,
+      "name": "Chris James",
+      "email": "chris@james.com"
+    },
+    {
+      "id": "3",
+      "name": "User Name",
+      "email": "user@name.com"
     }
   ],
-  "Posts": [
+  "posts": [
     {
       "id": 1,
       "userId": 1,
@@ -38,8 +48,25 @@
       "thumbnail": "https://vcvcvc-dev.us-east-1.linodeobjects.com/djscreenshot.png"
     }
   ],
-  "Comments": [],
-  "PostTypes": [
+  "comments": [
+    {
+      "id": 1,
+      "postId": 4,
+      "postTypeId": 3,
+      "postAuthorId": 1,
+      "userId": 2,
+      "text": "oh wow I'm gonna use this!"
+    },
+    {
+      "id": 2,
+      "postId": 0,
+      "postTypeId": 1,
+      "userId": 2,
+      "postAuthorId": 1,
+      "text": "I have a cousin that went to Syracuse, too. Neat."
+    }
+  ],
+  "postTypes": [
     {
       "id": 1,
       "type": "exp"

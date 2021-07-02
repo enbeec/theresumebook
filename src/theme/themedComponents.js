@@ -1,4 +1,21 @@
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
+
+export const ResumeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const VerticalSplit = styled.div`
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 60%;
+  /* parent */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 export const Image = styled.img`
   max-width: 80%;
@@ -59,12 +76,13 @@ export const Box = styled.div`
         `}
 
   /* extra styling for the form version of a box */
-  ${(props) =>
+  ${({ theme, ...props }) =>
     props.isForm &&
     css`
       padding: 0.5rem;
-      background: ${props.theme.colors.lavender};
+      background: ${theme.colors.lavender};
       justify-content: center;
+      transition: opacity 85ms ease-in-out;
       opacity: 40%;
       :hover,
       :focus-within {
@@ -107,10 +125,33 @@ export const LogoutButton = styled.button`
   :hover {
     color: coral;
     outline: black solid 0px;
-    box-shadow: -1px 2px darkgrey;
+    box-shadow: 1px 2px darkgrey;
   }
   :active {
     background: coral;
     color: white;
   }
+`;
+
+export const ShadowLink = styled(Link)`
+  text-decoration: none;
+  ${({ theme }) => css`
+    font-size: ${theme.fontSizes[0]};
+    color: ${theme.colors.darkgrey};
+    :hover {
+      color: ${theme.colors.grey};
+      text-shadow: 1px 1px 1px ${theme.colors.darkergrey};
+    }
+  `}
+`;
+
+export const CommentBox = styled.div`
+  ${({ theme }) => css`
+    text-align: left;
+    font-size: ${theme.fontSizes[1]}px;
+    opacity: 82%;
+    :hover {
+      opacity: 100%;
+    }
+  `}
 `;

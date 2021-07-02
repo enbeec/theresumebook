@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const useUserPosts = (userId) => {
   // new post types can be added updated on the fly even though I don't need that yet
+  // TODO move this to a provider
   const [postTypeIds] = useState({
     exp: 1,
     skill: 2,
