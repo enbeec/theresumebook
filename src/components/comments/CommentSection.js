@@ -11,7 +11,7 @@ export const CommentSection = ({ foreignKeys, ...props }) => {
 
   useEffect(() => {
     fetchComments(foreignKeys).then(setComments);
-  }, [foreignKeys, editingCommentIds]);
+  }, [foreignKeys, editingCommentIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
