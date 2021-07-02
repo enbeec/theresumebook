@@ -90,6 +90,18 @@ export const PostsList = ({
       <Box>
         This user has not listed any {props.altPostType || postType}s (yet).
       </Box>
+      {isCurrentUser && (
+        <PostForm
+          postType={postType}
+          Box={Box}
+          boxStyle={boxStyle}
+          renderCallback={doneEditing}
+          addPostFunc={addPost}
+          postTypeIds={postTypeIds}
+          putPostFunc={putPost}
+          {...props}
+        />
+      )}
     </Container>
   ) : (
     <Container containerStyle={containerStyle}>
