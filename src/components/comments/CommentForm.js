@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
+import useTones from "../../hooks/useTones";
 import { CommentBox } from "../../theme/themedComponents";
 
 export const CommentForm = ({
@@ -8,6 +9,7 @@ export const CommentForm = ({
   renderCallback,
   ...props
 }) => {
+  const checkTones = useTones();
   const postComment = (commentObj) =>
     fetch("http://localhost:6501/comments", {
       method: "POST",
@@ -52,18 +54,46 @@ export const CommentForm = ({
   };
 
   const handleSubmit = (e) => {
-    // TODO validation
     e.preventDefault();
-    if (comment.id) {
-      putComment(comment).then(() => renderCallback(comment.id));
-    } else {
-      // POST then setDisplayForm false and callback
-      postComment(comment).then(() => {
-        setDisplayForm(false);
-        initializeComment();
-        renderCallback();
-      });
-    }
+    checkTones(comment.text).then((toneObj) => {
+      const docTones = toneObj["document_tone"];
+      const tones = docTones.tones;
+      var isPositive = undefined;
+      var isNegative = undefined;
+      for (const tone of tones) {
+        // very naive but it's what I've got
+        switch (tone.tone_id) {
+          case "joy":
+            isPositive = tone.score >= 0.5 ? true : false;
+            break;
+          case "anger":
+            isNegative = tone.score >= 0.5 ? true : false;
+            break;
+          case "fear":
+            isNegative = tone.score >= 0.5 ? true : false;
+            break;
+          default:
+            break;
+        }
+      }
+      if (isPositive || !isNegative) {
+        // SUBMIT
+        if (comment.id) {
+          putComment(comment).then(() => {
+            renderCallback(comment.id);
+          });
+        } else {
+          // POST then setDisplayForm false and callback
+          postComment(comment).then(() => {
+            setDisplayForm(false);
+            initializeComment();
+            renderCallback();
+          });
+        }
+      } else {
+        window.alert("Please say something nice :)");
+      }
+    });
   };
 
   const handleCancel = (e) => {
