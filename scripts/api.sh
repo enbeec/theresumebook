@@ -5,6 +5,7 @@ INITFILE="api/example-db.json"
 DBFILE="api/db.json"
 API_PORT="6501"
 REQUIRED_TABLES="Users Comments Posts PostType"
+API_ADDRESS=$(hostname -I | awk '{print $1}')
 
 
 docheck() {
@@ -18,7 +19,7 @@ initialize() {
 start() {
 	echo "Starting json-server on port $API_PORT"
 	echo "press CTRL+C to exit"
-	json-server --port $API_PORT -w $DBFILE &
+	json-server --host localhost --host $API_ADDRESS --port $API_PORT -w $DBFILE &
 	wait
 }
 

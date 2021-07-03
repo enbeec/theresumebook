@@ -11,7 +11,9 @@ export const Register = (props) => {
   const history = useHistory();
 
   const existingUserCheck = () => {
-    return fetch(`http://localhost:6501/users?email=${email.current.value}`)
+    return fetch(
+      `http://${window.location.hostname}:6501/users?email=${email.current.value}`
+    )
       .then((res) => res.json())
       .then((user) => !!user.length);
   };
@@ -21,7 +23,7 @@ export const Register = (props) => {
 
     existingUserCheck().then((userExists) => {
       if (!userExists) {
-        fetch("http://localhost:6501/users", {
+        fetch(`http://${window.location.hostname}:6501/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

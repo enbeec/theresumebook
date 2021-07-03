@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react";
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
-  const apiURL = "http://localhost:6501";
+  const apiURL = `http://${window.location.hostname}:6501`;
   const usersURL = `${apiURL}/users`;
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
