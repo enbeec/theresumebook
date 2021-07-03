@@ -10,7 +10,9 @@ export const Login = (props) => {
   const history = useHistory();
 
   const existingUserCheck = () => {
-    return fetch(`http://localhost:6501/users?email=${email.current.value}`)
+    return fetch(
+      `http://${window.location.hostname}:6501/users?email=${email.current.value}`
+    )
       .then((res) => res.json())
       .then((user) => (user.length ? user[0] : false));
   };

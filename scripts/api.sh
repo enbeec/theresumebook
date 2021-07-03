@@ -19,7 +19,7 @@ initialize() {
 start() {
 	echo "Starting json-server on port $API_PORT"
 	echo "press CTRL+C to exit"
-	json-server --host $API_ADDRESS --port $API_PORT -w $DBFILE &
+	json-server --host localhost --host $API_ADDRESS --port $API_PORT -w $DBFILE &
 	wait
 }
 

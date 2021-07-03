@@ -9,7 +9,7 @@ const useUserPosts = (userId) => {
     project: 3,
   });
 
-  const postsURL = "http://localhost:6501/posts";
+  const postsURL = `http://${window.location.hostname}:6501/posts`;
 
   // create the proper URL for GETting a type of post
   const urlFor = (postType) =>
@@ -39,7 +39,7 @@ const useUserPosts = (userId) => {
   }
 
   function putPost(post) {
-    return fetch(postsURL, {
+    return fetch(`${postsURL}/${post.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

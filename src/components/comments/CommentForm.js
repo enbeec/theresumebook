@@ -11,14 +11,14 @@ export const CommentForm = ({
 }) => {
   const checkTones = useTones();
   const postComment = (commentObj) =>
-    fetch("http://localhost:6501/comments", {
+    fetch(`http://${window.location.hostname}:6501/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(commentObj),
     });
 
   const putComment = (commentObj) =>
-    fetch(`http://localhost:6501/comments/${commentObj.id}`, {
+    fetch(`http://${window.location.hostname}:6501/comments/${commentObj.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(commentObj),

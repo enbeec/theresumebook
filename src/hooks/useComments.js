@@ -15,7 +15,7 @@ const useComments = (foreignKeys) => {
 			  postTypeId: 2			  
 		  }	
 	*/
-  const apiURL = "http://localhost:6501/comments";
+  const apiURL = `http://${window.location.hostname}:6501/comments`;
   const makeURL = (foreignKeys) => {
     var params = "?";
     for (const fk in foreignKeys) {
