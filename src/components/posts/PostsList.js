@@ -36,7 +36,9 @@ export const PostsList = ({
   }, [editingPostIds, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const boxedPost = (p) =>
+    // if this post is being edited AND this is the current user...
     [...editingPostIds].indexOf(p.id) >= 0 && isCurrentUser ? (
+      // display the edit form for that post
       <PostForm
         postType={postType}
         key={p.id}
@@ -49,6 +51,7 @@ export const PostsList = ({
         putPostFunc={putPost}
       />
     ) : (
+      // else, here is how you display a post!
       <Box boxStyle={boxStyle} key={p.id}>
         <SubHeading> {p.title}</SubHeading>
         {thumbnail && (
@@ -70,7 +73,8 @@ export const PostsList = ({
             </button>
           </div>
         )}
-        {postTypeId === 3 && (
+        {/* projects are built different */}
+        {postTypeId === postTypeIds["project"] && (
           <>
             <div style={{ margin: "0.2rem" }} />
             <CommentSection
@@ -86,6 +90,7 @@ export const PostsList = ({
     );
 
   return !thereArePosts() ? (
+    // there are no posts --> but you can add to your own resume
     <Container>
       <Box>
         This user has not listed any {props.altPostType || postType}s (yet).
@@ -104,6 +109,7 @@ export const PostsList = ({
       )}
     </Container>
   ) : (
+    // there are posts --> display them
     <Container containerStyle={containerStyle}>
       {posts.map(boxedPost)}
       {isCurrentUser && (

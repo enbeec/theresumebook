@@ -14,6 +14,7 @@ export const PostForm = ({
   putPostFunc,
 }) => {
   const [displayForm, setDisplayForm] = useState(false);
+  // if we got a postObj, use it to set the initial state
   const [post, setPost] = useState(
     postObj
       ? postObj
@@ -101,6 +102,7 @@ export const PostForm = ({
   return !displayForm && !postObj ? (
     <Box isForm={true} boxStyle={boxStyle}>
       <button onClick={() => setDisplayForm(true)}>
+        {/* indefinite takes care of 'a' vs. 'an' (mostly) */}
         Add {indefinite(altPostType || postType)}
       </button>
     </Box>
